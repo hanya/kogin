@@ -1,0 +1,139 @@
+
+#key-selector {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+.keycodes {
+  position: relative;
+  margin: auto;
+}
+
+.keycode-page {
+  position: relative;
+  padding: auto;
+  width: 100%;
+}
+
+.keycode-subsection {
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.keycode {
+  /* position: absolute; */
+  position: relative;
+  font-family: sans-serif;
+  font-size: 12px;
+  /* font-weight: bold; */
+  line-height: 14px;
+  border: solid #888888 1px;
+  padding: 1px;
+  margin: 2px;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  /* display: flex; */
+  float: left;
+  user-select: none;
+}
+
+.keycode-smaller {
+  font-size: 10px;
+}
+
+.keycode-125 {
+  width: 46px;
+}
+
+.keycode-150 {
+  width: 56px;
+}
+
+.keycode-175 {
+  width: 66px;
+}
+
+.keycode-200 {
+  width: 76px;
+}
+
+.keycode-225 {
+  width: 86px;
+}
+
+.keycode-250 {
+  width: 96px;
+}
+
+.keycode-275 {
+  width: 106px;
+}
+
+.keycode-625 {
+  width: 246px;
+}
+
+.spacer-newrow {
+  clear: left;
+}
+
+.spacer-25 {
+  margin: 1px;
+  width: 8px;
+  display: flex;
+  float: left;
+  position: relative;
+}
+
+.spacer-50 {
+  margin: 1px;
+  width: 18px;
+  display: flex;
+  float: left;
+  position: relative;
+}
+
+.spacer-75 {
+  margin: 1px;
+  width: 28px;
+  display: flex;
+  float: left;
+  position: relative;
+}
+
+.spacer-100 {
+  margin: 2px;
+  width: 36px;
+  display: flex;
+  float: left;
+  position: relative;
+}
+
+.vertspacer-25 {
+  height: 9px;
+}
+
+.vertspacer-50 {
+  height: 18px;
+}
+
+
+.nav-item {
+  line-height: 14px;
+  font-size: 14px;
+  min-width: 100px;
+  text-align: center;
+}
+
+.nav-link {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  cursor: pointer;
+}
+
+.tab-content {
+  padding: 5px;
+}

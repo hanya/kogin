@@ -1,0 +1,2818 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden;">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title id="document-title">Kogin</title>
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <link rel="stylesheet" href="./assets/css/sashi.css" />
+  <link rel="stylesheet" href="./assets/css/keyselector.css" />
+  <script src="./assets/extjs/paper-core.min.js"></script>
+</head>
+<body>
+  <div id="content">
+    <canvas id="canvas" class="canvas" width="2001" height="1008"></canvas>
+    <div id="content-overlay" class="content-overlay overlay-hidden"></div>
+  </div>
+
+  <div id="overlay" class="overlay-hidden"></div>
+
+  <div class="is-hoverable" id="dropdowns">
+
+    <div class="tool-dropdown-top is-hidden" id="menu-dropdown">
+      <div class="tool-dropdown-content">
+
+        <div class="tool is-button" id="save-from-menu-tool">
+          <div class="icon-container">
+            <svg id="save-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Save file</span>
+          <span id="save-from-menu-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="save-as-tool">
+          <div class="icon-container">
+            <svg id="save-as-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Save as...</span>
+          <span id="save-as-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="save-as-storage-tool">
+          <div class="icon-container">
+            <svg id="save-as-storage-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Save in storage as...</span>
+          <span id="save-as-storage-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="save-as-template-tool">
+          <div class="icon-container">
+            <svg id="save-as-template-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Save as template...</span>
+          <span id="save-as-template-tool-key"></span>
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="open-from-menu-tool">
+          <div class="icon-container">
+            <svg id="open-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Open...</span>
+          <span id="open-from-menu-tool-key"></span>
+        </div>
+        <div class="tool is-button" id="open-from-storage-tool">
+          <div class="icon-container">
+            <svg id="open-from-storage-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Open from storage...</span>
+          <span id="open-from-storage-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="open-template-tool">
+          <div class="icon-container">
+            <svg id="open-template-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Open from templates...</span>
+          <span id="open-template-tool-key"></span>
+        </div>
+        <div class="tool is-button" id="new-tool">
+          <div class="icon-container">
+            <svg id="new-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">New file</span>
+          <span id="new-tool-key"></span>
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="pdf-export-local-tool">
+          <div class="icon-container">
+            <svg id="pdf-export-local-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">PDF export...</span>
+          <span id="pdf-export-local-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="pdf-export-storage-tool">
+          <div class="icon-container">
+            <svg id="pdf-export-storage-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">PDF export in storage...</span>
+          <span id="pdf-export-storage-tool-key"></span>
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="canvas-size-tool">
+          <div class="icon-container">
+            <svg id="canvas-size-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Change canvas size</span>
+          <span id="canvas-size-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="solve-overlapping-tool">
+          <div class="icon-container">
+            <svg id="solve-overlapping-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Solve overlapping</span>
+          <span id="solve-overlapping-tool-key"></span>
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="image-setting-tool">
+          <div class="icon-container">
+            <svg id="image-setting-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">View and image save setting</span>
+          <span id="image-setting-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="print-setting-tool">
+          <div class="icon-container">
+            <svg id="print-setting-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Print setting</span>
+          <span id="print-setting-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="bounds-setting-tool">
+          <div class="icon-container">
+            <svg id="bounds-setting-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Bounds setting</span>
+          <span id="bounds-setting-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="view-setting-tool">
+          <div class="icon-container">
+            <svg id="view-setting-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">View setting</span>
+          <span id="view-setting-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="metadata-tool">
+          <div class="icon-container">
+            <svg id="metadata-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Metadata</span>
+          <span id="metadata-tool-key"></span>
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="shortcut-key-dialog-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Edit shortcut keys</span>
+          <span id="shortcut-key-dialog-key"></span>
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="help-tool">
+          <div class="icon-container">
+            <svg id="help-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Help</span>
+          <span id="help-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="shortcut-keys-tool">
+          <div class="icon-container">
+            <svg id="help-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Shortcut keys</span>
+          <span id="shortcut-keys-tool-key"></span>
+        </div>
+
+        <div class="tool is-button" id="about-tool">
+          <div class="icon-container">
+            <svg id="about-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">About</span>
+          <span id="about-tool-key"></span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="stitch-color-dropdown">
+      <div class="tool-dropdown-content">
+        <div class="array-dropdown-items">
+          <table class="dropdown-items" id="color-palette">
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="template-history-dropdown">
+      <div class="tool-dropdown-content">
+        <div style="display: flex;">
+          <span class="tool-label title">Recent templates</span>
+          <input type="checkbox" id="template-history-keep-color">
+          <label for="template-history-keep-color" class="tool-label">Keep color</label>
+        </div>
+        <div id="template-history-container">
+          <div id="template-history-contents"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="stitchn-dropdown">
+      <div class="tool-dropdown-content">
+
+        <div class="tool is-button" id="stitch7-tool">
+          <div class="icon-container">
+            <svg id="stitch7-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+              <path d="m 9.5,7 a 0.5,0.5 0 0 0 -0.5,0.5 v 2 a 0.5,0.5 0 1 0 1,0 v -1.5 h 5.8 l -3.7,9.3 a 0.5,0.5 0 1 0 0.9,0.4 l 4,-10 A 0.5,0.5 0 0 0 16.5,7 Z" />
+            </svg>
+          </div>
+          <span class="tool-label">Stitch 7</span>
+        </div>
+
+        <div class="tool is-button" id="stitch8-tool">
+          <div class="icon-container">
+            <svg id="stitch8-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+              <path d="m 12.5,6.9 c -0.8,0 -1.7,0.3 -2.4,0.8 -0.7,0.5 -1.2,1.3 -1.2,2.3 0,1.1 0.8,1.8 1.5,2.2 0.3,0.2 0.4,0.2 0.6,0.3 -0.2,0.1 -0.3,0.1 -0.5,0.2 -0.9,0.5 -1.6,1.4 -1.6,2.5 0,0.9 0.5,1.6 1.1,2.1 0.6,0.5 1.5,0.7 2.3,0.8 a 0.5,0.5 0 0 0 0,0 c 0.9,0 1.7,-0.3 2.4,-0.7 0.7,-0.5 1.2,-1.2 1.2,-2.1 0,-1.1 -0.7,-1.9 -1.3,-2.5 -0.1,-0.1 -0.2,-0.1 -0.3,-0.2 0.3,-0.2 0.6,-0.4 0.9,-0.7 0.5,-0.6 0.8,-1.3 0.8,-2 0,-0.8 -0.5,-1.6 -1.1,-2.1 C 14.2,7.3 13.4,6.9 12.5,6.9 Z m 0,1 c 0.6,0 1.3,0.2 1.7,0.6 0.5,0.4 0.8,0.8 0.8,1.3 0,0.4 -0.2,0.9 -0.6,1.3 -0.4,0.4 -0.8,0.7 -1.2,0.7 a 0.5,0.5 0 0 0 -0.3,0.1 c -0.1,0 -0.3,0.1 -0.5,0.1 A 0.5,0.5 0 0 0 12.1,11.9 c 0,0 -0.5,-0.2 -1.1,-0.5 C 10.5,11 10,10.5 10,10 10,9.4 10.3,8.9 10.8,8.5 11.2,8.2 11.9,7.9 12.5,7.9 Z m 0.6,4.9 c 0.1,0 0.5,0.2 0.9,0.6 0.5,0.4 1,1 1,1.7 0,0.4 -0.3,0.9 -0.7,1.2 C 13.8,16.8 13.1,17 12.5,17 11.9,17 11.2,16.8 10.7,16.4 10.3,16.1 10,15.7 10,15.2 10,14.5 10.5,13.9 11.2,13.5 c 0.6,-0.4 1.5,-0.6 2,-0.6 z" />
+            </svg>
+          </div>
+          <span class="tool-label">Stitch 8</span>
+        </div>
+
+        <div class="tool is-button" id="stitch9-tool">
+          <div class="icon-container">
+            <svg id="stitch9-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+              <path d="m 12.5,7 c -1.1,0 -2,0.3 -2.6,0.9 -0.6,0.6 -0.9,1.4 -0.9,2.4 0,0.7 0.2,1.5 0.6,2.2 0.4,0.7 1.1,1.2 1.9,1.3 1.6,0 2.6,-0.9 3.2,-1.6 0.1,0.8 0.2,1.8 0.2,2 -0.3,1.5 -1.4,2.2 -2.5,2.6 -1.1,0.4 -2.1,0.3 -2.1,0.3 a 0.5,0.5 0 1 0 0,1 c 0,0 1.2,0 2.5,-0.4 1.3,-0.4 2.8,-1.4 3.1,-3.3 0.2,-0.8 0.1,-2.4 -0.3,-4 C 15.4,9.4 15.1,8.7 14.6,8.1 14.1,7.4 13.4,7 12.5,7 Z m 0,1 c 0.5,5 0.9,0.2 1.3,0.7 0.4,0.4 0.6,1.1 0.8,1.8 0,0.1 3,0.1 0,0.2 a 0.5,0.5 0 0 0 0,0 c 0,0 -1.3,2.1 -3.1,2 C 11.2,12.7 10.8,12.4 10.5,11.9 10.2,11.4 10,10.8 10,10.2 10,9.5 10.2,9 10.6,8.6 11,8.3 11.6,8 12.5,8 Z" />
+            </svg>
+          </div>
+          <span class="tool-label">Stitch 9</span>
+        </div>
+
+        <div class="tool is-button" id="stitchnn-tool">
+          <div class="icon-container">
+            <svg id="stitchn-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+              <path d="M 15.5,7 A 0.5,0.5 0 0 0 15,7.5 V 15.7 L 9.9,7.2 A 0.5,0.5 0 0 0 9,7.5 V 17.5 a 0.5,0.5 0 1 0 1,0 V 9.3 L 15.1,17.8 A 0.5,0.5 0 0 0 16,17.5 V 7.5 A 0.5,0.5 0 0 0 15.5,7 Z" />
+            </svg>
+          </div>
+          <span class="tool-label">Stitch N</span>
+          <input type="number" class="input-value" id="stitchn-input-value" min="1" step="1" value="10">
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="kataxsized-tool">
+          <div class="icon-container">
+            <svg id="katax-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 2.3,1.7 1.6,2.4 l 16,16 0.7,-0.7 z" />
+              <path d="m 17.6,1.7 -16,16 0.7,0.7 16,-16 z" />
+            </svg>
+          </div>
+          <span class="tool-label">X</span>
+          <input type="number" class="input-value" id="katax-input-value" min="2" step="1" value="10">
+        </div>
+
+        <div class="tool is-button" id="katavsized-tool">
+          <div class="icon-container">
+            <svg id="katav-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 2.5,2.1 -0.9,0.4 8,16 a 0.5,0.5 0 0 0 0.9,0 l 8,-16 -0.9,-0.4 -7.6,15.1 z" />
+            </svg>
+          </div>
+          <span class="tool-label">V</span>
+          <input type="number" class="input-value" id="katav-input-value" min="2" step="1" value="10">
+        </div>
+
+        <div class="tool is-button" id="katareversevsized-tool">
+          <div class="icon-container">
+            <svg id="katareversev-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 10.3,1.4 A 0.5,0.5 0 0 0 9.8,1.7 l -8,16 0.9,0.4 7.6,-15.1 7.6,15.1 0.9,-0.4 -8,-16 a 0.5,0.5 0 0 0 -0.4,-0.3 z" />
+            </svg>
+          </div>
+          <span class="tool-label">Reversed V</span>
+          <input type="number" class="input-value" id="katareversev-input-value" min="2" step="1" value="10">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="katako-dropdown">
+      <div class="tool-dropdown-content" style="min-width: auto;">
+        <table>
+          <tr>
+            <td><div class="tool is-button modoko-number" id="katako-3-tool">3</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-5-tool">5</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-7-tool">7</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-9-tool">9</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-11-tool">11</div></td>
+          </tr>
+          <tr>
+            <td><div class="tool is-button modoko-number" id="katako-13-tool">13</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-15-tool">15</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-17-tool">17</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-19-tool">19</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-21-tool">21</div></td>
+          </tr>
+          <tr>
+            <td><div class="tool is-button modoko-number" id="katako-23-tool">23</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-25-tool">25</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-27-tool">27</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-29-tool">29</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-31-tool">31</div></td>
+          </tr>
+          <tr>
+            <td><div class="tool is-button modoko-number" id="katako-33-tool">33</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-35-tool">35</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-37-tool">37</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-39-tool">39</div></td>
+            <td><div class="tool is-button modoko-number" id="katako-41-tool">41</div></td>
+          </tr>
+        </table>
+
+        <div class="tool is-button" id="katakosized-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 10,2.1 A 0.5,0.5 0 0 0 10,2 0.5,0.5 0 0 0 10,2.1 0.5,0.5 0 0 0 9.6,2.3 L 2,9.7 a 0.5,0.5 0 0 0 0,0.7 l 7.5,7.5 a 0.5,0.5 0 0 0 0.7,0 l 7.5,-7.5 a 0.5,0.5 0 0 0 0,-0.7 L 10.4,2.3 a 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.3,-0.2 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 z M 10,3.3 17,10 10,17 3.2,10 Z" />
+            </svg>
+          </div>
+          <span class="tool-label">Katako frame</span>
+          <input type="number" class="input-value" id="katako-input-value" min="3" step="2" value="43" style="width: 100px;">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="modoko-dropdown">
+      <div class="tool-dropdown-content" style="min-width: auto;">
+        <table>
+          <tr>
+            <td><div class="tool is-button modoko-number" id="modoko-3-tool">3</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-5-tool">5</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-7-tool">7</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-9-tool">9</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-11-tool">11</div></td>
+          </tr>
+          <tr>
+            <td><div class="tool is-button modoko-number" id="modoko-13-tool">13</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-15-tool">15</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-17-tool">17</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-19-tool">19</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-21-tool">21</div></td>
+          </tr>
+          <tr>
+            <td><div class="tool is-button modoko-number" id="modoko-23-tool">23</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-25-tool">25</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-27-tool">27</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-29-tool">29</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-31-tool">31</div></td>
+          </tr>
+          <tr>
+            <td><div class="tool is-button modoko-number" id="modoko-33-tool">33</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-35-tool">35</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-37-tool">37</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-39-tool">39</div></td>
+            <td><div class="tool is-button modoko-number" id="modoko-41-tool">41</div></td>
+          </tr>
+        </table>
+
+        <div class="tool is-button" id="modokosized-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 10,2.1 A 0.5,0.5 0 0 0 10,2 0.5,0.5 0 0 0 10,2.1 0.5,0.5 0 0 0 9.6,2.3 L 2,9.7 a 0.5,0.5 0 0 0 0,0.7 l 7.5,7.5 a 0.5,0.5 0 0 0 0.7,0 l 7.5,-7.5 a 0.5,0.5 0 0 0 0,-0.7 L 10.4,2.3 a 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.3,-0.2 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 z M 10,3.3 17,10 10,17 3.2,10 Z" />
+            </svg>
+          </div>
+          <span class="tool-label">Modoko frame</span>
+          <input type="number" class="input-value" id="modoko-input-value" min="3" step="2" value="43" style="width: 100px;">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tool-dropdown-bottom is-hidden" id="layer-dropdown">
+      <div class="tool-dropdown-content" id="layers"></div>
+    </div>
+
+    <div class="tool-dropdown-bottom is-hidden" id="layer-menu-dropdown">
+      <div class="tool-dropdown-content">
+
+        <div class="tool is-button" id="layer-new-tool">
+          <div class="icon-container">
+            <svg id="layer-new-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">New layer</span>
+        </div>
+
+        <div class="tool is-button" id="layer-rename-tool">
+          <div class="icon-container">
+            <svg id="layer-rename-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Rename layer</span>
+        </div>
+
+        <div class="tool is-button" id="layer-delete-tool">
+          <div class="icon-container">
+            <svg id="layer-delete-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Delete layer</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tool-dropdown-bottom is-hidden" id="view-mode-dropdown">
+      <div class="tool-dropdown-content">
+
+        <div class="tool is-button" id="view-mode-line-grain-tool">
+          <div class="icon-container">
+            <svg id="line-grain-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 3.5,7 v 0.3 5.6 h 12 V 7 Z" style="fill:#9c9c9c;" />
+              <path d="M 3,1 V 19 H 4 V 1 Z" />
+              <path d="m 15,1 v 18 h 1 V 1 Z" />
+              <path d="M 1,4 V 5 H 18 V 4 Z" />
+              <path d="m 1,15 v 1 h 17 v -1 z" />
+              <path d="M 7,1 V 19 H 8 V 1 Z" />
+              <path d="m 11,1 v 18 h 1 V 1 Z" />
+          </svg>
+          </div>
+          <span class="tool-label">Line grain</span>
+        </div>
+
+        <div class="tool is-button" id="view-mode-fill-grain-tool">
+          <div class="icon-container">
+            <svg id="fill-grain-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 3.5,4.5 V 5 15.5 h 12 v -11 z" style="fill:#9c9c9c;" />
+              <path d="M 3,1 V 19 H 4 V 1 Z" />
+              <path d="m 15,1 v 18 h 1 V 1 Z" />
+              <path d="M 1,4 V 5 H 18 V 4 Z" />
+              <path d="m 1,15 v 1 h 17 v -1 z" />
+              <path d="M 7,1 V 19 H 8 V 1 Z" />
+              <path d="m 11,1 v 18 h 1 V 1 Z" />
+            </svg>
+          </div>
+          <span class="tool-label">Fill grain</span>
+        </div>
+
+        <div class="tool is-button" id="view-mode-over-grain-tool">
+          <div class="icon-container">
+            <svg id="over-grain-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 3,1 v 18 h 1 V 1 Z" />
+              <path d="m 15,1 v 18 h 1 V 1 Z" />
+              <path d="M 1,4 V 5 H 18 V 4 Z" />
+              <path d="m 1,15 v 1 H 18 v -1 z" />
+              <path d="m 7,1 v 18 h 1 V 1 Z" />
+              <path d="m 11,1 v 18 h 1 V 1 Z" />
+              <path d="m 3,8 a 2,2 0 1 0 0,4 H 17 a 2,2 0 1 0 0,-4 z" style="fill:#9c9c9c;" />
+            </svg>
+          </div>
+          <span class="tool-label">Over grain</span>
+        </div>
+
+        <div class="tool is-button" id="view-mode-over-warp-tool">
+          <div class="icon-container">
+            <svg id="over-warp-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 5,1 V 19 H 6 V 1 Z" />
+              <path d="M 1,4 V 5 H 18 V 4 Z" />
+              <path d="m 1,15 v 1 h 17 v -1 z" />
+              <path d="m 9,1 v 18 h 1 V 1 Z" />
+              <path d="m 13,1 v 18 h 1 V 1 Z" />
+              <path d="m 4,8 a 2,2 0 1 0 0,4 h 11 a 2,2 0 1 0 0,-4 z" style="fill:#9c9c9c;" />
+            </svg>
+          </div>
+          <span class="tool-label">Over warp</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="is-hoverable" id="dialogs">
+
+    <div class="tool-dropdown-top is-hidden" id="canvas-size-dialog">
+      <div class="tool-dropdown-content">
+        <table class="dropdown-items">
+          <tr>
+            <td colspan="2" class="title tool-label">Change canvas size</td>
+          </tr>
+          <tr>
+            <td class="tool-label">Horizontal count</td>
+            <td><input class="input-value" type="number" min="1" id="canvas-size-hori-count"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Vertical count</td>
+            <td><input class="input-value" type="number" min="1" id="canvas-size-vert-count"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="title tool-label">Base point</td>
+          </tr>
+        </table>
+        <table>
+          <tr><td><input type="radio" name="base" id="base-top-left"><label for="base-top-left" class="tool-label">Top left</label></td><td></td><td><input type="radio" name="base" id="base-top-right"><label for="base-top-right" class="tool-label">Top right</label></td></tr>
+          <tr><td></td><td><input type="radio" name="base" id="base-center"><label for="base-center" class="tool-label">Center</label></td><td></td></tr>
+          <tr><td><input type="radio" name="base" id="base-bottom-left"><label for="base-bottom-left" class="tool-label">Bottom left</label></td><td></td><td><input type="radio" name="base" id="base-bottom-right"><label for="base-bottom-right" class="tool-label">Bottom right</label></td></tr>
+        </table>
+        <div class="box-buttons">
+          <div class="tool is-button ok-button" id="canvas-size-ok-tool" tabindex="0">OK</div>
+          <div class="tool is-button cancel-button" id="canvas-size-cancel-tool" tabindex="0">Cancel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="image-setting-dialog">
+      <div class="tool-wide-dialog">
+        <div class="tool-wide-dialog-content">
+          <div>
+            <table class="dropdown-items">
+              <tr>
+                <td colspan="2" class="title tool-label">Image save setting</td>
+              </tr>
+              <tr>
+                <td class="tool-label">Use xlink</td>
+                <td><input class="input-value" type="checkbox" id="image-setting-xlink"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Monochrome</td>
+                <td><input class="input-value" type="checkbox" id="image-setting-monochrome"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Background</td>
+                <td><input class="input-value" type="checkbox" id="image-setting-background"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Background color</td>
+                <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="image-setting-background-color"></td>
+              </tr>
+            </table>
+            <table class="dropdown-items">
+              <tr>
+                <td colspan="2" class="title tool-label">Display setting</td>
+              </tr>
+              <tr>
+                <td class="tool-label">Show title</td>
+                <td><input class="input-value" type="checkbox" id="image-setting-show-title"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Show copyright</td>
+                <td><input class="input-value" type="checkbox" id="image-setting-show-copyright"></td>
+              </tr>
+            </table>
+            <table class="dropdown-items">
+              <tr>
+                <td colspan="2" class="title tool-label">Margin setting</td>
+              </tr>
+              <tr>
+                <td class="tool-label">Left margin</td>
+                <td><input class="input-value" type="number" min="0" step="1" id="image-setting-left-margin"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Right margin</td>
+                <td><input class="input-value" type="number" min="0" step="1" id="image-setting-right-margin"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Top margin</td>
+                <td><input class="input-value" type="number" min="0" step="1" id="image-setting-top-margin"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Bottom margin</td>
+                <td><input class="input-value" type="number" min="0" step="1" id="image-setting-bottom-margin"></td>
+              </tr>
+            </table>
+          </div>
+
+          <div>
+            <table class="dropdown-items">
+              <tr>
+                <td colspan="2" class="title tool-label">Grid setting</td>
+              </tr>
+              <tr>
+                <td class="tool-label">Over grid</td>
+                <td><input class="input-value" type="checkbox" id="image-setting-over-grid"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Horizontal count</td>
+                <td><input class="input-value" type="number" min="1" id="image-setting-hori-count"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Vertical count</td>
+                <td><input class="input-value" type="number" min="1" id="image-setting-vert-count"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Width [px]</td>
+                <td><input class="input-value" type="number" min="1" id="image-setting-width"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Height [px]</td>
+                <td><input class="input-value" type="number" min="1" id="image-setting-height"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Line color</td>
+                <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="image-setting-line-color"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Major line color</td>
+                <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="image-setting-major-line-color"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Major line frequency</td>
+                <td><input class="input-value" type="number" min="0" step="1" id="image-setting-major-frequency"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Numbering color</td>
+                <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="image-setting-numbering-color"></td>
+              </tr>
+            </table>
+
+            <table class="dropdown-items">
+              <tr>
+                <td colspan="2" class="title tool-label">Stitch setting</td>
+              </tr>
+              <tr>
+                <td class="tool-label">Line grain line width [px]</td>
+                <td><input class="input-value" type="number" min="1" step="1" id="image-setting-linegrain-line-width"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Overgrain line width [px]</td>
+                <td><input class="input-value" type="number" min="1" step="1" id="image-setting-overgrain-line-width"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Overwarp line width [px]</td>
+                <td><input class="input-value" type="number" min="1" step="1" id="image-setting-overwarp-line-width"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Overgrain offset ratio</td>
+                <td><input class="input-value" type="number" min="-1" step="0.05" max="1" id="image-setting-overgrain-offset-ratio"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Overwarp offset ratio</td>
+                <td><input class="input-value" type="number" min="-1" step="0.05" max="1" id="image-setting-overwarp-offset-ratio"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <table class="dropdown-items">
+          <tr>
+            <td colspan="2"><div class="tool is-button" id="image-setting-load-initial-tool">Reset value</div></td>
+          </tr>
+          <tr>
+            <td colspan="2"><div class="tool is-button" id="image-setting-load-default-tool">Default value</div></td>
+          </tr>
+        </table>
+        <div class="box-buttons">
+          <div class="tool is-button ok-button" id="image-setting-default-ok-tool" tabindex="0">Save as default</div>
+          <div class="tool is-button ok-button" id="image-setting-document-ok-tool" tabindex="0">Apply for this document</div>
+          <div class="tool is-button cancel-button" id="image-setting-close-tool" tabindex="0">Close</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="print-setting-dialog">
+      <div class="tool-wide-dialog">
+        <div class="tool-wide-dialog-content">
+          <div>
+            <table class="dropdown-items">
+              <tr>
+                <td colspan="2" class="title tool-label">Print setting</td>
+              </tr>
+              <tr>
+                <td class="tool-label">Use xlink</td>
+                <td><input class="input-value" type="checkbox" id="print-setting-xlink"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Monochrome</td>
+                <td><input class="input-value" type="checkbox" id="print-setting-monochrome"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Background</td>
+                <td><input class="input-value" type="checkbox" id="print-setting-background"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Background color</td>
+                <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="print-setting-background-color"></td>
+              </tr>
+            </table>
+            <table class="dropdown-items">
+              <tr>
+                <td colspan="2" class="title tool-label">Display setting</td>
+              </tr>
+              <tr>
+                <td class="tool-label">Show title</td>
+                <td><input class="input-value" type="checkbox" id="print-setting-show-title"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Show copyright</td>
+                <td><input class="input-value" type="checkbox" id="print-setting-show-copyright"></td>
+              </tr>
+            </table>
+            <table class="dropdown-items">
+              <tr>
+                <td colspan="2" class="title tool-label">Margin setting</td>
+              </tr>
+              <tr>
+                <td class="tool-label">Left margin</td>
+                <td><input class="input-value" type="number" min="0" step="1" id="print-setting-left-margin"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Right margin</td>
+                <td><input class="input-value" type="number" min="0" step="1" id="print-setting-right-margin"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Top margin</td>
+                <td><input class="input-value" type="number" min="0" step="1" id="print-setting-top-margin"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Bottom margin</td>
+                <td><input class="input-value" type="number" min="0" step="1" id="print-setting-bottom-margin"></td>
+              </tr>
+            </table>
+          </div>
+
+          <div>
+            <table class="dropdown-items">
+              <tr>
+                <td colspan="2" class="title tool-label">Grid setting</td>
+              </tr>
+              <tr>
+                <td class="tool-label">Show grid</td>
+                <td><input class="input-value" type="checkbox" id="print-setting-show-grid"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Over grid</td>
+                <td><input class="input-value" type="checkbox" id="print-setting-over-grid"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Width [mm]</td>
+                <td><input class="input-value" type="number" step="0.1" min="0" id="print-setting-width"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Height [mm]</td>
+                <td><input class="input-value" type="number" step="0.1" min="0" id="print-setting-height"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Line width [mm]</td>
+                <td><input class="input-value" type="number" step="0.01" min="0" id="print-setting-line-width"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Line color</td>
+                <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="print-setting-line-color">
+                </td>
+              </tr>
+
+              <tr>
+                <td class="tool-label">Major line color</td>
+                <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="print-setting-major-color"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Major line frequency</td>
+                <td><input class="input-value" type="number" min="0" step="1" id="print-setting-major-frequency"></td>
+              </tr>
+
+              <tr>
+                <td class="tool-label">Show major line</td>
+                <td><input class="input-value" type="checkbox" id="print-setting-show-major"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Outer frame</td>
+                <td><input class="input-value" type="checkbox" id="print-setting-outer-frame"></td>
+              </tr>
+
+              <tr>
+                <td class="tool-label">Major vertical offset</td>
+                <td><input class="input-value" type="number" min="0" id="print-setting-major-vert-offset"></td>
+              </tr>
+
+              <tr>
+                <td class="tool-label">Major horizontal offset</td>
+                <td><input class="input-value" type="number" min="0" id="print-setting-major-hori-offset"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Numbering color</td>
+                <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="print-setting-numbering-color"></td>
+              </tr>
+            </table>
+
+            <table class="dropdown-items">
+              <tr>
+                <td colspan="2" class="title tool-label">Stitch setting</td>
+              </tr>
+              <tr>
+                <td class="tool-label">Line grain line width [mm]</td>
+                <td><input class="input-value" type="number" min="1" step="1" id="print-setting-linegrain-line-width"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Overgrain line width [mm]</td>
+                <td><input class="input-value" type="number" min="1" step="1" id="print-setting-overgrain-line-width"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Overwarp line width [mm]</td>
+                <td><input class="input-value" type="number" min="1" step="1" id="print-setting-overwarp-line-width"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Overgrain offset ratio</td>
+                <td><input class="input-value" type="number" min="-1" step="0.05" max="1" id="print-setting-overgrain-offset-ratio"></td>
+              </tr>
+              <tr>
+                <td class="tool-label">Overwarp offset ratio</td>
+                <td><input class="input-value" type="number" min="-1" step="0.05" max="1" id="print-setting-overwarp-offset-ratio"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <table class="dropdown-items">
+          <tr>
+            <td colspan="2"><div class="tool is-button" id="print-setting-load-initial-tool">Reset value</div></td>
+          </tr>
+          <tr>
+            <td colspan="2"><div class="tool is-button" id="print-setting-load-default-tool">Default value</div></td>
+          </tr>
+        </table>
+        <div class="box-buttons">
+          <div class="tool is-button ok-button" id="print-setting-default-ok-tool" tabindex="0">Save as default</div>
+          <div class="tool is-button ok-button" id="print-setting-document-ok-tool" tabindex="0">Apply for this document</div>
+          <div class="tool is-button cancel-button" id="print-setting-close-tool" tabindex="0">Close</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="bounds-setting-dialog">
+      <div class="tool-dropdown-content">
+        <table class="dropdown-items">
+          <tr>
+            <td colspan="2" class="title tool-label">Bounds setting</td>
+          </tr>
+          <tr>
+            <td class="tool-label">Use bounds</td>
+            <td><input class="input-value" type="checkbox" id="bounds-setting-use"></td>
+          </tr>
+          <tr>
+            <td colspan="2"><div class="tool is-button" id="bounds-setting-reset-tool">Reset bounds</div></td>
+          </tr>
+        </table>
+        <div class="box-buttons">
+          <div class="tool is-button ok-button" id="bounds-setting-ok-tool" tabindex="0">OK</div>
+          <div class="tool is-button cancel-button" id="bounds-setting-cancel-tool" tabindex="0">Cancel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="view-setting-dialog">
+      <div class="tool-dropdown-content">
+        <table class="dropdown-items">
+          <tr>
+            <td colspan="2" class="title tool-label">View setting</td>
+          </tr>
+          <tr>
+            <td class="tool-label">Selection color</td>
+            <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="view-setting-selection-color"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Cursor color</td>
+            <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="view-setting-cursor-color"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Overlay stitch color</td>
+            <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="view-setting-overlay-stitch-color"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Pivot color</td>
+            <td><input class="input-value" type="text" pattern="#[0-9a-f]{3,8}" id="view-setting-pivot-color"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Open from toolbar</td>
+            <td>
+              <select id="view-setting-open-from-toolbar">
+                <option id="view-setting-open-from-toolbar-local" class="tool-label">Local</option>
+                <option id="view-setting-open-from-toolbar-storage" class="tool-label">Storage</option>
+                <option id="view-setting-open-from-toolbar-templates" class="tool-label">Templates</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="tool-label">Save from toolbar</td>
+            <td>
+              <select id="view-setting-save-from-toolbar">
+                <option id="view-setting-save-from-toolbar-local" class="tool-label">Local (overwrite)</option>
+                <option id="view-setting-save-from-toolbar-local-save-as" class="tool-label">Local (save as)</option>
+                <option id="view-setting-save-from-toolbar-storage" class="tool-label">Storage (overwrite)</option>
+                <option id="view-setting-save-from-toolbar-storage-save-as" class="tool-label">Storage (save as)</option>
+                <option id="view-setting-save-from-toolbar-templates" class="tool-label">Templates (overwrite)</option>
+                <option id="view-setting-save-from-toolbar-templates-save-as" class="tool-label">Templates (save as)</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="tool-label">Ask when closing</td>
+            <td><input class="input-value" type="checkbox" id="view-setting-ask-when-closing"></td>
+          </tr>
+          <tr id="view-setting-templates-dialog" class="is-no-display">
+            <td colspan="2" class="title tool-label">Templates dialog</td>
+          </tr>
+          <tr id="auto-scroll-on-templates" class="is-no-display">
+            <td class="tool-label">Use auto-scroll</td>
+            <td><input class="input-value" type="checkbox" id="view-setting-auto-scroll"></td>
+          </tr>
+
+          <tr>
+            <td colspan="2"><div class="tool is-button" id="view-setting-load-initial-tool">Reset value</div></td>
+          </tr>
+          <tr>
+            <td colspan="2"><div class="tool is-button" id="view-setting-load-default-tool">Default value</div></td>
+          </tr>
+        </table>
+        <div class="box-buttons">
+          <div class="tool is-button ok-button" id="view-setting-default-ok-tool" tabindex="0">Save as default</div>
+          <div class="tool is-button ok-button" id="view-setting-document-ok-tool" tabindex="0">Apply for this document</div>
+          <div class="tool is-button cancel-button" id="view-setting-close-tool" tabindex="0">Close</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="metadata-dialog">
+      <div class="tool-dropdown-content">
+        <table class="dropdown-items">
+          <tr>
+            <td colspan="2" class="title tool-label">Metadata</td>
+          </tr>
+          <tr>
+            <td class="tool-label">Title</td>
+            <td><input class="input-value input-metadata" type="text" id="metadata-title"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Title en.</td>
+            <td><input class="input-value input-metadata" type="text" id="metadata-title-en"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Creation date</td>
+            <td><input class="input-value input-metadata" type="text" id="metadata-creation-date"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Author</td>
+            <td><input class="input-value input-metadata" type="text" id="metadata-author"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">License</td>
+            <td><input class="input-value input-metadata" type="text" id="metadata-license"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Keyword</td>
+            <td><input class="input-value input-metadata" type="text" id="metadata-keyword"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Description</td>
+            <td><input class="input-value input-metadata" type="text" id="metadata-description"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Version</td>
+            <td><input class="input-value input-metadata" type="text" id="metadata-version"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Copyright</td>
+            <td><input class="input-value input-metadata" type="text" id="metadata-copyright"></td>
+          </tr>
+          <tr>
+            <td class="tool-label">Type</td>
+            <td><input class="input-value input-metadata" type="text" id="metadata-type"></td>
+          </tr>
+          <tr>
+            <td colspan="2"><div class="tool is-button" id="metadata-store-tool">Store as default</div></td>
+          </tr>
+        </table>
+        <div class="box-buttons">
+          <div class="tool is-button ok-button" id="metadata-ok-tool" tabindex="0">OK</div>
+          <div class="tool is-button cancel-button" id="metadata-cancel-tool" tabindex="0">Cancel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="move-dialog">
+      <div class="tool-dropdown-content">
+        <div class="array-dropdown-items">
+          <table class="dropdown-items">
+            <tr>
+              <td class="tool-label">Horizontal offset</td>
+              <td><input type="number" step="1" class="input-value" id="move-hori-offset" value="0"></td>
+            </tr>
+            <tr>
+              <td class="tool-label">Vertical offset</td>
+              <td><input type="number" step="1" class="input-value" id="move-vert-offset" value="0"></td>
+            </tr>
+          </table>
+          <div class="box-buttons">
+            <div class="tool is-button ok-button" id="move-ok-tool" tabindex="0">OK</div>
+            <div class="tool is-button cancel-button" id="move-cancel-tool" tabindex="0">Cancel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="array-dialog">
+      <div class="tool-dropdown-content">
+        <div class="array-dropdown-items">
+          <table class="dropdown-items">
+            <tr>
+              <td class="tool-label">Horizontal count</td>
+              <td><input type="number" min="1" step="1" class="input-value" id="array-hori-count" value="1"></td>
+            </tr>
+            <tr>
+              <td class="tool-label">Vertical count</td>
+              <td><input type="number" min="1" step="1" class="input-value" id="array-vert-count" value="1"></td>
+            </tr>
+            <tr>
+              <td class="tool-label">Horizontal spacing</td>
+              <td><input type="number" step="1" class="input-value" id="array-hori-spacing" value="0"></td>
+            </tr>
+            <tr>
+              <td class="tool-label">Vertical spacing</td>
+              <td><input type="number" step="1" class="input-value" id="array-vert-spacing" value="0"></td>
+            </tr>
+            <tr>
+              <td class="tool-label">Horizontal offset</td>
+              <td><input type="number" step="1" class="input-value" id="array-hori-offset" value="0"></td>
+            </tr>
+            <tr>
+              <td class="tool-label">Vertical offset</td>
+              <td><input type="number" step="1" class="input-value" id="array-vert-offset" value="0"></td>
+            </tr>
+            <tr>
+              <td colspan="2" class="tool-label">
+                <input class="checkbox-value" id="array-group" type="checkbox">
+                <label class="tool-label" for="array-group">Make group</label>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div class="tool is-button" id="array-reset-tool">Reset</div>
+              </td>
+            </tr>
+          </table>
+          <div class="box-buttons">
+            <div class="tool is-button ok-button" id="array-ok-tool" tabindex="0">OK</div>
+            <div class="tool is-button cancel-button" id="array-cancel-tool" tabindex="0">Cancel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="move-to-layer-dialog">
+      <div class="tool-dropdown-content">
+        <div class="array-dropdown-items">
+          <div class="title tool-label">Move to layer</div>
+          <select id="layer-list" size="5"></select>
+          <div class="box-buttons">
+            <div class="tool is-button ok-button" id="move-to-layer-ok-tool" tabindex="0">OK</div>
+            <div class="tool is-button cancel-button" id="move-to-layer-cancel-tool" tabindex="0">Cancel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <nav id="topbar" class="toolbar">
+
+    <div class="toolbar-item">
+      <div class="toolset">
+        <div class="tool is-button dropdown-tool" title="Menu" id="menu-tool">
+          <div class="icon-container">
+            <svg id="menu-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 4,4 A 0.5,0.5 0 1 0 4,5 H 16 A 0.5,0.5 0 1 0 16,4 Z" />
+              <path d="m 4,9 a 0.5,0.5 0 1 0 0,1 h 12 a 0.5,0.5 0 1 0 0,-1 z" />
+              <path d="m 4,14 a 0.5,0.5 0 1 0 0,1 h 12 a 0.5,0.5 0 1 0 0,-1 z" />
+            </svg>
+            <svg class="svg-icon icon-xsmall" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+              <path d="m 0.5,0 a 0.5,0.5 0 0 0 -0.4,0.8 l 3,5 a 0.5,0.5 0 0 0 0.9,0 l 3,-5 A 0.5,0.5 0 1 0 6.1,0.2 L 3.5,4.5 0.9,0.2 a 0.5,0.5 0 0 0 -0.5,-0.2 z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toolbar-item">
+      <div class="toolset-separator"></div>
+      <div class="toolset">
+        <div class="tool is-button" title="New file" id="new-from-toolbar-tool">
+          <div class="icon-container">
+            <svg id="open-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 2.5,2 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.1 0.5,0.5 0 0 0 -0.1,0.4 V 17.5 a 0.5,0.5 0 0 0 0.5,0.5 l 15,0 a 0.5,0.5 0 0 0 0.5,-0.5 V 2.5 a 0.5,0.5 0 0 0 -0.5,-0.5 H 2.6 A 0.5,0.5 0 0 0 2.5,2 Z M 3,3 H 17 V 17 L 3,17 Z" />
+              <path d="m 8.4,12 a 0.5,0.5 0 1 0 0,1 h 6.2 a 0.5,0.5 0 1 0 0,-1 z" />
+              <path d="m 11.5,8.8 a 0.5,0.5 0 0 0 -0.5,0.5 v 6.2 a 0.5,0.5 0 1 0 1,0 V 9.3 A 0.5,0.5 0 0 0 11.5,8.8 Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="tool is-button" title="Open file" id="open-from-toolbar-tool">
+          <div class="icon-container">
+            <svg id="open-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 1.5,8 A 0.5,0.5 0 0 0 1,8.5 v 9 A 0.5,0.5 0 0 0 1.5,18 h 16 A 0.5,0.5 0 0 0 18,17.5 v -9 A 0.5,0.5 0 0 0 17.5,8 Z M 2,9 h 15 v 8 H 2 Z" />
+              <path d="M 2.5,2 A 0.5,0.5 0 0 0 2,2.4 L 1,8.2 a 0.5,0.5 0 1 0 1,0.2 L 2.9,3 H 8.1 L 9,5.7 A 0.5,0.5 0 0 0 9.5,6 H 17 l 0,2.3 a 0.5,0.5 0 1 0 1,0 L 18,5.5 A 0.5,0.5 0 0 0 17.5,5 H 9.9 L 9,2.3 A 0.5,0.5 0 0 0 8.5,2 Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="tool is-button" title="Save file" id="save-from-toolbar-tool">
+          <div class="icon-container">
+            <svg id="save-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 8.5,5 a 0.5,0.5 0 0 0 -0.5,0.5 V 10 h -1.5 a 0.5,0.5 0 0 0 -0.4,0.8 l 3.5,4.2 a 0.5,0.5 0 0 0 0.8,0 l 3.5,-4.2 A 0.5,0.5 0 0 0 13.5,10 h -1.5 V 5.5 a 0.5,0.5 0 0 0 -0.5,-0.5 z m 0.5,1 h 2 v 4.5 a 0.5,0.5 0 0 0 0.5,0.5 h 0.9 L 10,13.9 7.6,11 h 0.9 a 0.5,0.5 0 0 0 0.5,-0.5 z" />
+              <path d="m 2.5,2 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 V 17.5 a 0.5,0.5 0 0 0 0.5,0.5 l 15,0 a 0.5,0.5 0 0 0 0.5,-0.5 V 2.5 a 0.5,0.5 0 0 0 -0.5,-0.5 H 2.6 A 0.5,0.5 0 0 0 2.5,2 Z M 3,3 H 17 V 17 L 3,17 Z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar-item">
+      <div class="toolset-separator"></div>
+      <div class="toolset">
+        <div class="tool is-button" title="Undo" id="undo-undo-tool" disabled>
+          <div class="icon-container">
+            <svg id="undo-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 8.5,2 A 0.5,0.5 0 0 0 8.2,2.2 L 1.4,7.6 a 0.5,0.5 0 0 0 0,0.8 l 6.8,5.4 a 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0.5,0.1 0.5,0.5 0 0 0 0.1,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0.1,-0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0.1,-0.4 v -2.2 c 0.3,0 1.1,-0.2 2.3,-0.2 0.7,0 1.5,0 2.1,0.1 0.6,0.1 1.1,0.3 1.3,0.5 0.2,0.2 0.3,0.6 0.2,1.2 0,0.6 -0.2,1.3 -0.4,1.9 -0.4,1.3 -1.1,2.5 -1.1,2.5 a 0.5,0.5 0 0 0 0.8,0.6 c 0,0 1,-1 2.1,-2.4 1,-1.4 2.1,-3.1 2.1,-4.7 0,-1.5 -0.4,-2.5 -1.1,-3.4 C 16.9,6.5 16,6 15,5.5 14,5 12.4,4.8 11,4.8 9.9,4.7 9.4,4.8 9,4.8 V 2.5 a 0.5,0.5 0 0 0 -0.5,-0.5 z M 8,3.6 v 1.7 a 0.5,0.5 0 0 0 0.5,0.5 c 0,0 1.1,-0.1 2.4,0 1.3,0.1 2.9,0.3 3.6,0.6 0.9,0.4 1.6,0.9 2.1,1.6 0.5,0.6 0.8,1.5 0.8,2.8 0,1.1 -0.9,2.8 -1.9,4.1 0,0 0,0 0,0 0.2,-0.7 0.4,-1.3 0.4,-2 0,-0.7 0,-1.4 -0.5,-1.9 -0.5,-0.5 -1.1,-0.7 -1.9,-0.8 -0.7,-0.1 -1.5,-0.2 -2.3,-0.2 -1.5,0 -2.9,0.2 -2.9,0.2 a 0.5,0.5 0 0 0 -0.4,0.5 v 1.7 L 2.5,8 Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="tool is-button" title="Redo" id="undo-redo-tool" disabled>
+          <div class="icon-container">
+            <svg id="redo-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 11.6,2 a 0.5,0.5 0 0 1 0.3,0.1 l 6.8,5.5 a 0.5,0.5 0 0 1 0,0.8 l -6.8,5.4 a 0.5,0.5 0 0 1 0,0 0.5,0.5 0 0 1 -0.5,0.1 0.5,0.5 0 0 1 -0.1,0 0.5,0.5 0 0 1 0,0 0.5,0.5 0 0 1 0,0 0.5,0.5 0 0 1 0,0 0.5,0.5 0 0 1 -0.1,-0.1 0.5,0.5 0 0 1 0,0 0.5,0.5 0 0 1 0,0 0.5,0.5 0 0 1 -0.1,-0.4 v -2.2 c -0.3,0 -1.1,-0.2 -2.3,-0.2 -0.7,0 -1.5,0 -2.1,0.1 -0.6,0.1 -1.1,0.3 -1.3,0.5 -0.2,0.2 -0.3,0.6 -0.2,1.2 0,0.6 0.2,1.3 0.4,1.9 0.4,1.3 1.1,2.5 1.1,2.5 a 0.5,0.5 0 0 1 -0.8,0.6 c 0,0 -1,-1 -2.1,-2.4 C 2.6,14.1 1.5,12.3 1.5,10.7 1.5,9.3 1.9,8.2 2.6,7.3 3.2,6.5 4.1,6 5,5.5 c 1.1,-0.5 2.7,-0.7 4,-0.7 1.1,0 1.6,0 2,0 V 2.5 a 0.5,0.5 0 0 1 0.5,-0.5 z m 0.5,1.5 v 1.7 a 0.5,0.5 0 0 1 -0.5,0.5 c 0,0 -1.1,-0.1 -2.4,0 -1.3,0.1 -2.9,0.3 -3.6,0.6 -0.9,0.4 -1.6,0.9 -2.1,1.6 -0.5,0.6 -0.8,1.5 -0.8,2.8 0,1.1 0.9,2.8 1.9,4.1 0,0 0,0 0,0 -0.2,-0.7 -0.4,-1.3 -0.4,-2 0,-0.7 0,-1.4 0.5,-1.9 0.5,-0.5 1.1,-0.7 1.9,-0.8 0.7,-0.1 1.5,-0.2 2.3,-0.2 1.5,0 2.9,0.2 2.9,0.2 a 0.5,0.5 0 0 1 0.4,0.5 v 1.7 L 17.6,8 Z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar-item">
+      <div class="toolset-separator"></div>
+      <div class="toolset">
+        <div class="tool is-button" title="Copy" id="copy-copy-tool">
+          <div class="icon-container">
+            <svg id="copy-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 8.5,5 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 A 0.5,0.5 0 0 0 8.1,5.2 0.5,0.5 0 0 0 8,5.6 V 18.5 A 0.5,0.5 0 0 0 8.5,19 h 10 A 0.5,0.5 0 0 0 19,18.5 V 5.5 A 0.5,0.5 0 0 0 18.5,5 H 8.6 a 0.5,0.5 0 0 0 -0.1,0 z M 9,6 h 9 V 18 H 9 Z" />
+              <path d="M 1.5,1 A 0.5,0.5 0 0 0 1,1.5 v 13 A 0.5,0.5 0 0 0 1.5,15 h 6.7 a 0.5,0.5 0 1 0 0,-1 H 2 V 2 h 9 v 3.5 a 0.5,0.5 0 1 0 1,0 v -4 A 0.5,0.5 0 0 0 11.5,1 Z" />
+              <path d="m 5.5,10 a 0.5,0.5 0 1 0 0,1 H 14 a 0.5,0.5 0 1 0 0,-1 z" />
+              <path d="M 11.2,7 A 0.5,0.5 0 0 0 10.8,8 l 2.5,2.5 -2.5,2.5 a 0.5,0.5 0 1 0 0.7,0.7 l 2.8,-2.8 a 0.5,0.5 0 0 0 0,-0.7 L 11.5,7.3 A 0.5,0.5 0 0 0 11.2,7.1 Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="tool is-button" title="Cut" id="copy-cut-tool">
+          <div class="icon-container">
+            <svg id="cut-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 16.7,0.7 A 0.5,0.5 0 0 0 16.3,0.9 L 8.9,12.6 C 8.5,12.5 7.6,12.3 6.1,12.3 5.2,12.3 4.3,12.3 3.4,12.7 2.6,13 1.8,13.5 1.4,14.4 c -0.4,0.9 -0.3,1.7 0.1,2.3 0.5,0.6 1.2,0.8 1.9,1 1.4,0.4 2.9,0.4 2.9,0.4 a 0.5,0.5 0 0 0 0.4,-0.2 L 9.4,13.6 A 0.5,0.5 0 0 0 9.8,13.1 L 17.1,1.5 A 0.5,0.5 0 0 0 16.7,0.7 Z M 6.1,13.3 c 1.2,0 1.7,0.2 2.2,0.3 l -2.3,3.6 c -0.2,0 -1.3,0 -2.4,-0.3 -0.6,-0.2 -1.1,-0.4 -1.4,-0.7 -0.2,-0.3 -0.3,-0.6 0,-1.2 0.3,-0.6 0.8,-1 1.5,-1.2 0.7,-0.2 1.5,-0.3 2.3,-0.3 z" />
+              <path d="M 3.3,0.7 A 0.5,0.5 0 0 0 2.9,1.5 L 10.3,13.1 a 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0.4,0.5 l 2.7,4.3 a 0.5,0.5 0 0 0 0.4,0.2 c 0,0 1.5,0 2.9,-0.4 0.7,-0.2 1.4,-0.5 1.9,-1 0.5,-0.6 0.6,-1.4 0.1,-2.3 -0.4,-0.9 -1.2,-1.4 -2.1,-1.7 -0.9,-0.3 -1.8,-0.4 -2.7,-0.4 -1.5,0 -2.4,0.2 -2.8,0.3 L 3.7,0.9 A 0.5,0.5 0 0 0 3.3,0.7 Z M 13.9,13.3 c 0.8,0 1.6,0.1 2.3,0.3 0.7,0.2 1.2,0.6 1.5,1.2 0.3,0.6 0.2,0.9 0,1.2 -0.2,0.3 -0.8,0.6 -1.4,0.7 -1.1,0.3 -2.2,0.3 -2.4,0.3 l -2.3,-3.5 c 0.5,-0.1 1,-0.3 2.2,-0.3 z" />
+            </svg>
+          </div>
+        </div>
+        <div class="tool is-button" title="Paste" id="copy-paste-tool">
+          <div class="icon-container">
+            <svg id="paste-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 1.5,4 A 0.5,0.5 0 0 0 1,4.5 v 13 A 0.5,0.5 0 0 0 1.5,18 h 5.7 a 0.5,0.5 0 1 0 0,-1 H 2 V 5 h 12 v 2.2 a 0.5,0.5 0 1 0 1,0 V 4.5 A 0.5,0.5 0 0 0 14.5,4 Z" />
+              <path d="M 4.5,1 A 0.5,0.5 0 0 0 4,1.5 v 2.8 a 0.5,0.5 0 1 0 1,0 V 2 h 6 v 2.3 a 0.5,0.5 0 1 0 1,0 V 1.5 A 0.5,0.5 0 0 0 11.5,1 Z" />
+              <path d="m 7.5,7 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 V 18.5 a 0.5,0.5 0 0 0 0.5,0.5 H 17.5 A 0.5,0.5 0 0 0 18,18.5 V 7.5 A 0.5,0.5 0 0 0 17.5,7 H 7.6 A 0.5,0.5 0 0 0 7.5,7 Z M 8,8 H 17 V 18 H 8 Z" />
+              <path d="m 4.5,12.1 a 0.5,0.5 0 0 0 0.1,1 h 8.5 a 0.5,0.5 0 1 0 0,-1 H 4.5 a 0.5,0.5 0 0 0 -0.1,0 z" />
+              <path d="M 10.2,9.2 A 0.5,0.5 0 0 0 9.8,10.1 L 12.3,12.6 9.8,15 a 0.5,0.5 0 1 0 0.7,0.7 l 2.8,-2.8 a 0.5,0.5 0 0 0 0,-0.7 L 10.5,9.4 A 0.5,0.5 0 0 0 10.2,9.2 Z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="toolset-separator"></div>
+
+        <div class="tool is-button" title="Template horizontal mirror" id="template-hmirror-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 10,1.3 A 0.5,0.5 0 0 0 9.5,1.8 v 1 a 0.5,0.5 0 1 0 1,0 v -1 A 0.5,0.5 0 0 0 10,1.3 Z m 0,4 A 0.5,0.5 0 0 0 9.5,5.8 v 1 a 0.5,0.5 0 1 0 1,0 v -1 A 0.5,0.5 0 0 0 10,5.3 Z m 0,4 A 0.5,0.5 0 0 0 9.5,9.8 v 1 a 0.5,0.5 0 1 0 1,0 V 9.8 A 0.5,0.5 0 0 0 10,9.3 Z m 0,4 a 0.5,0.5 0 0 0 -0.5,0.5 v 1 a 0.5,0.5 0 1 0 1,0 v -1 a 0.5,0.5 0 0 0 -0.5,-0.5 z m 0,4 a 0.5,0.5 0 0 0 -0.5,0.5 v 1 a 0.5,0.5 0 1 0 1,0 v -1 a 0.5,0.5 0 0 0 -0.5,-0.5 z" />
+              <path d="M 7,2.3 A 0.5,0.5 0 0 0 6.6,2.6 l -6,15 a 0.5,0.5 0 0 0 0.5,0.7 h 6 a 0.5,0.5 0 0 0 0.5,-0.5 V 2.8 a 0.5,0.5 0 0 0 -0.5,-0.5 z M 6.5,5.4 V 17.3 H 1.8 Z" />
+              <path d="m 13,2.3 a 0.5,0.5 0 0 0 -0.5,0.5 V 17.8 a 0.5,0.5 0 0 0 0.5,0.5 h 6 A 0.5,0.5 0 0 0 19.5,17.6 l -6,-15 A 0.5,0.5 0 0 0 13,2.3 Z m 0.5,3.1 4.8,11.9 h -4.8 z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool is-button" title="Template vertical mirror" id="template-vmirror-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 1,10.3 a 0.5,0.5 0 0 0 0.5,0.5 h 1 a 0.5,0.5 0 1 0 0,-1 h -1 a 0.5,0.5 0 0 0 -0.5,0.5 z m 4,0 a 0.5,0.5 0 0 0 0.5,0.5 h 1 a 0.5,0.5 0 1 0 0,-1 h -1 a 0.5,0.5 0 0 0 -0.5,0.5 z m 4,0 a 0.5,0.5 0 0 0 0.5,0.5 h 1 a 0.5,0.5 0 1 0 0,-1 H 9.5 a 0.5,0.5 0 0 0 -0.5,0.5 z m 4,0 a 0.5,0.5 0 0 0 0.5,0.5 l 1,0 a 0.5,0.5 0 1 0 0,-1 l -1,0 a 0.5,0.5 0 0 0 -0.5,0.5 z m 4,0 a 0.5,0.5 0 0 0 0.5,0.5 h 1 a 0.5,0.5 0 1 0 0,-1 h -1 a 0.5,0.5 0 0 0 -0.5,0.5 z" />
+              <path d="m 2,13.3 a 0.5,0.5 0 0 0 0.3,0.4 l 15,6 a 0.5,0.5 0 0 0 0.7,-0.5 v -6 a 0.5,0.5 0 0 0 -0.5,-0.5 H 2.5 a 0.5,0.5 0 0 0 -0.5,0.5 z m 3.1,0.5 11.9,0 v 4.8 z" />
+              <path d="m 2,7.3 a 0.5,0.5 0 0 0 0.5,0.5 l 15,0 a 0.5,0.5 0 0 0 0.5,-0.5 v -6 A 0.5,0.5 0 0 0 17.4,0.8 l -15,6 A 0.5,0.5 0 0 0 2,7.3 Z M 5.1,6.8 17,2 v 4.8 z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool is-button" title="Template horizontal and vertical mirror" id="template-hvmirror-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <circle r="1" cy="10" cx="10" />
+              <path d="M 7.1,0.6 A 0.5,0.5 0 0 0 6.7,0.9 l -6,10 a 0.5,0.5 0 0 0 0.4,0.8 h 6 a 0.5,0.5 0 0 0 0.5,-0.5 V 1.1 A 0.5,0.5 0 0 0 7.1,0.6 Z M 6.6,2.9 V 10.6 H 2 Z" />
+              <path d="m 13.1,8.6 a 0.5,0.5 0 0 0 -0.5,0.5 v 10 a 0.5,0.5 0 0 0 0.9,0.3 l 6,-10 A 0.5,0.5 0 0 0 19.1,8.6 Z m 0.5,1 h 4.6 l -4.6,7.7 z" />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="toolbar-item">
+      <div class="toolset-separator"></div>
+      <div class="toolset">
+        <div class="tool is-button is-activatable" title="Select" id="select-tool">
+          <div class="icon-container">
+            <svg id="select-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 2.5,1 A 0.5,0.5 0 0 0 2,1.5 l 0,12.2 A 0.5,0.5 0 0 0 2.8,14.1 l 3.8,-2.6 5,7.3 a 0.5,0.5 0 0 0 0.7,0.1 l 2.6,-1.9 a 0.5,0.5 0 0 0 0.1,-0.7 L 10,9.3 13.5,6.9 A 0.5,0.5 0 0 0 13.4,6 L 2.7,1.1 A 0.5,0.5 0 0 0 2.5,1 Z M 3,2.3 12.2,6.6 9,8.7 a 0.5,0.5 0 0 0 -0.1,0.7 L 13.9,16.5 12.1,17.8 7.2,10.7 a 0.5,0.5 0 0 0 -0.3,-0.3 0.5,0.5 0 0 0 -0.5,0.1 l -3.4,2.3 z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool is-button is-activatable" title="Points select" id="points-select-tool">
+          <div class="icon-container">
+            <svg id="points-select-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 9.2,6 A 0.4,0.4 0 0 0 8.9,6.4 v 8.7 a 0.4,0.4 0 0 0 0.6,0.3 l 2.7,-1.9 3.6,5.2 a 0.4,0.4 0 0 0 0.5,0.1 l 1.9,-1.4 a 0.4,0.4 0 0 0 0.1,-0.5 l -3.6,-5 2.5,-1.7 A 0.4,0.4 0 0 0 17,9.6 L 9.4,6.1 A 0.4,0.4 0 0 0 9.2,6 Z m 0.4,0.9 6.6,3.1 -2.3,1.5 a 0.4,0.4 0 0 0 -0.1,0.5 l 3.6,5.1 -1.3,0.9 -3.5,-5.1 a 0.4,0.4 0 0 0 -0.2,-0.2 0.4,0.4 0 0 0 -0.4,0.1 L 9.6,14.5 Z" />
+              <path d="M 16.8,1.6 2.1,1.7 A 0.5,0.5 0 0 0 1.6,2.2 l 0,15.2 a 0.5,0.5 0 0 0 0.8,0.4 L 9.5,11.8 8.9,11 2.6,16.3 2.6,2.7 15.9,2.6 12.7,7.9 13.5,8.4 17.2,2.4 A 0.5,0.5 0 0 0 16.8,1.6 Z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool is-button is-activatable" title="Click and delete" id="click-delete-tool">
+          <div class="icon-container">
+            <svg id="click-delete-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 2.5,1 A 0.5,0.5 0 0 0 2.1,1.8 c 0,0 1.1,2.3 2.7,4.4 0.8,1.1 1.6,2.1 2.6,2.8 0.5,0.3 0.9,0.6 1.4,0.7 0.5,0.1 1,0.1 1.5,-0.1 1.7,-0.9 2.2,-2.6 2.2,-4 0,-1.4 -0.4,-2.6 -0.4,-2.6 a 0.5,0.5 0 1 0 -0.9,0.3 c 0,0 0.4,1.1 0.4,2.3 0,1.2 -0.3,2.5 -1.6,3.1 C 9.6,8.8 9.3,8.8 9,8.7 8.7,8.6 8.3,8.4 7.9,8.1 7.1,7.6 6.3,6.6 5.5,5.6 4.1,3.6 3,1.3 3,1.3 A 0.5,0.5 0 0 0 2.5,1 Z" />
+              <path d="m 13.4,10.6 a 0.5,0.5 0 0 0 -0.3,0.1 l -2.8,2 a 0.5,0.5 0 0 0 -0.1,0.7 l 3.4,4.9 a 0.5,0.5 0 0 0 0.3,0.2 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0.4,-0.1 l 2.7,-1.9 a 0.5,0.5 0 0 0 0.1,-0.7 l -3.4,-5 a 0.5,0.5 0 0 0 -0.4,-0.2 z m -0.1,1.2 2.9,4.2 -2,1.4 -2.9,-4.1 z" />
+              <path d="M 10.6,8.7 9.8,9.3 l 1.8,2.7 0.8,-0.6 z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool is-button dropdown-tool" title="Template" id="template-tool">
+          <div class="icon-container">
+            <svg id="template-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 7,7.5 a 0.5,0.5 0 1 0 0,1 h 6 a 0.5,0.5 0 1 0 0,-1 z" />
+              <path d="M 10,8 A 0.5,0.5 0 0 0 9.5,8.5 V 14 a 0.5,0.5 0 1 0 1,0 V 8.5 A 0.5,0.5 0 0 0 10,8 Z" />
+              <path d="m 10,1.5 a 0.5,0.5 0 0 0 -0.4,0.2 0.5,0.5 0 0 0 0,0 l -7.9,7.9 a 0.5,0.5 0 0 0 0,0.7 l 8,8 a 0.5,0.5 0 0 0 0.7,0 l 7.5,-8 a 0.5,0.5 0 0 0 0,-0.7 l -7.4,-7.9 0,0 a 0.5,0.5 0 0 0 -0.3,-0.2 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0 0.5,0.5 0 0 0 0,0 z M 10,2.7 16.8,10 10,17.3 2.7,10 Z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool is-button" title="Template history" id="template-history-tool">
+          <div class="icon-container">
+            <svg id="template-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 7.8,9.1 a 0.3,0.5 0 1 0 0,1 h 4.2 a 0.3,0.5 0 1 0 0,-1 z" />
+              <path d="m 7.8,6.7 a 0.5,0.5 0 0 0 -0.5,0.5 v 5.5 a 0.5,0.5 0 1 0 1,0 V 7.2 a 0.5,0.5 0 0 0 -0.5,-0.5 z" />
+              <path d="m 10,1.5 a 0.5,0.5 0 0 0 -0.4,0.2 0.5,0.5 0 0 0 0,0 l -7.9,7.9 a 0.5,0.5 0 0 0 0,0.7 l 8,8 a 0.5,0.5 0 0 0 0.7,0 l 7.5,-8 a 0.5,0.5 0 0 0 0,-0.7 l -7.4,-7.9 0,0 a 0.5,0.5 0 0 0 -0.3,-0.2 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0 0.5,0.5 0 0 0 0,0 z M 10,2.7 16.8,10 10,17.3 2.7,10 Z" />
+              <path d="m 11.9,6.7 a 0.5,0.5 0 0 0 -0.5,0.5 v 5.5 a 0.5,0.5 0 1 0 1,0 V 7.2 a 0.5,0.5 0 0 0 -0.5,-0.5 z" />
+            </svg>
+            <svg class="svg-icon icon-xsmall" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+              <path d="m 0.5,0 a 0.5,0.5 0 0 0 -0.4,0.8 l 3,5 a 0.5,0.5 0 0 0 0.9,0 l 3,-5 A 0.5,0.5 0 1 0 6.1,0.2 L 3.5,4.5 0.9,0.2 a 0.5,0.5 0 0 0 -0.5,-0.2 z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="toolset" id="kogin-tools">
+          <div class="tool is-button is-activatable" title="Stitch 1" id="stitch1-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+                <path d="M 13.5,7 A 0.5,0.5 0 0 0 13.2,7.1 l -4,3 a 0.5,0.5 0 1 0 0.6,0.8 L 13,8.5 v 9 a 0.5,0.5 0 1 0 1,0 V 7.5 a 0.5,0.5 0 0 0 -0.5,-0.5 z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="tool is-button is-activatable" title="Stitch 3" id="stitch3-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+                <path d="m 13.5,7 c -0.9,0 -1.7,0.5 -2.3,0.9 -0.6,0.4 -1,0.9 -1,0.9 a 0.5,0.5 0 1 0 0.7,0.7 c 0,0 0.4,-0.4 0.9,-0.7 0.5,-0.4 1.2,-0.7 1.8,-0.7 0.5,0 1.2,0.2 1.7,0.6 0.5,0.4 0.8,0.8 0.8,1.5 0,0.3 -0.1,0.5 -0.4,0.8 -0.3,0.2 -0.7,0.5 -1.1,0.7 -0.9,0.3 -1.7,0.5 -1.7,0.5 a 0.5,0.5 0 0 0 0,1 c 0,0 0.9,0.1 1.8,0.5 0.4,0.2 0.9,0.4 1.1,0.7 0.3,0.3 0.4,0.5 0.4,0.8 0,0.7 -0.3,1.2 -0.8,1.5 -0.5,0.3 -1.1,0.5 -1.6,0.5 -0.6,0 -1.3,-0.3 -1.9,-0.6 -0.6,-0.3 -1,-0.7 -1,-0.7 a 0.5,0.5 0 1 0 -0.6,0.8 c 0,0 0.5,0.4 1.1,0.8 0.7,0.4 1.5,0.8 2.4,0.8 0.7,0 1.5,-0.2 2.1,-0.7 0.6,-0.5 1.1,-1.3 1.2,-2.3 0,-0.6 -0.3,-1.2 -0.7,-1.6 -0.4,-0.4 -0.9,-0.7 -1.4,-0.9 -0.1,-0.1 -0.1,0 -0.3,-0.1 0.1,0 0.1,0 0.2,-0.1 0.5,-0.2 1,-0.5 1.4,-0.8 0.4,-0.4 0.8,-0.9 0.8,-1.5 0,-1 -0.6,-1.8 -1.3,-2.3 -0.7,-0.5 -1.5,-0.8 -2.3,-0.8 z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="tool is-button is-activatable" title="Stitch 5" id="stitch5-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+                <path d="m 9.5,7 a 0.5,0.5 0 0 0 -0.5,0.5 v 4.2 a 0.5,0.5 0 0 0 0.7,0.4 c 0,0 0.5,-0.3 1.2,-0.6 0.7,-0.3 1.5,-0.5 1.9,-0.5 1.1,0 2.2,1.3 2.2,2.7 0,0.6 -0.3,1.5 -0.7,2.1 -0.4,0.6 -1,1 -1.5,1 -0.6,0 -1.4,-0.3 -2,-0.6 -0.6,-0.3 -1,-0.7 -1,-0.7 a 0.5,0.5 0 1 0 -0.6,0.8 c 0,0 0.5,0.4 1.2,0.7 0.7,0.4 1.6,0.8 2.5,0.7 1,0 1.8,-0.7 2.3,-1.5 0.5,-0.8 0.9,-1.8 0.9,-2.7 a 0.5,0.5 0 0 0 0,0 c 0,-1.9 -1.4,-3.6 -3.2,-3.6 -0.8,0 -1.6,0.3 -2.3,0.6 -0.3,0.1 -0.3,0.1 -0.5,0.2 V 8 h 5.6 a 0.5,0.5 0 1 0 0,-1 z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="tool is-button" id="modoko-tool" title="Modoko frame">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="M 10,2.1 A 0.5,0.5 0 0 0 10,2 0.5,0.5 0 0 0 10,2.1 0.5,0.5 0 0 0 9.6,2.3 L 2,9.7 a 0.5,0.5 0 0 0 0,0.7 l 7.5,7.5 a 0.5,0.5 0 0 0 0.7,0 l 7.5,-7.5 a 0.5,0.5 0 0 0 0,-0.7 L 10.4,2.3 a 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.3,-0.2 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 z M 10,3.3 17,10 10,17 3.2,10 Z" />
+              </svg>
+              <svg class="svg-icon icon-xsmall" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+                <path d="m 0.5,0 a 0.5,0.5 0 0 0 -0.4,0.8 l 3,5 a 0.5,0.5 0 0 0 0.9,0 l 3,-5 A 0.5,0.5 0 1 0 6.1,0.2 L 3.5,4.5 0.9,0.2 a 0.5,0.5 0 0 0 -0.5,-0.2 z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="toolset" id="hishi-tools">
+          <div class="tool is-button is-activatable" title="Stitch 2" id="stitch2-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+                <path d="M 13,7 C 11.5,7 10.4,7.7 10,8.5 9.2,9.2 9,9.9 9,9.9 A 0.5,0.5 0 1 0 10,10.2 c 0,0 0.2,-0.5 0.6,-1.1 0.5,-0.6 1.2,-1.1 2.4,-1.1 a 0.5,0.5 0 0 0 0,0 c 0.9,0 1.5,0.3 1.9,0.8 0.4,0.5 0.6,1.1 0.6,1.9 0,0 -0.1,0.2 -0.2,0.5 -0.2,0.3 -0.4,0.6 -0.7,0.9 -0.6,0.7 -1.4,1.5 -2.2,2.3 -1.6,1.5 -3.2,2.8 -3.2,2.8 A 0.5,0.5 0 0 0 9.5,18 h 6.5 a 0.5,0.5 0 1 0 0,-1 h -5.2 c 0.6,-0.5 1.1,-0.9 2.3,-2 0.8,-0.8 1.6,-1.6 2.3,-2.3 0.3,-0.4 0.6,-0.7 0.8,-1.1 0.2,-0.3 0.4,-0.6 0.4,-1 C 16.5,9.7 16.3,8.8 15.7,8.1 15.1,7.4 14.2,7 13,7 Z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="tool is-button is-activatable" title="Stitch 4" id="stitch4-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+                <path d="M 13.5,7 A 0.5,0.5 0 0 0 13.1,7.2 l -5,7 A 0.5,0.5 0 0 0 8.5,15 H 13 v 2.5 a 0.5,0.5 0 1 0 1,0 v -2.5 h 1.5 a 0.5,0.5 0 1 0 0,-1 H 14 V 7.5 A 0.5,0.5 0 0 0 13.5,7 Z M 13,9.1 V 14 H 9.5 Z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="tool is-button is-activatable" title="Stitch 6" id="stitch6-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+                <path d="m 14.3,7 c 0,0 -1,-0.1 -2.1,0.4 -1.1,0.4 -2.4,1.4 -3,3.4 -0.2,0.9 -0.2,2.2 0.1,3.5 a 0.5,0.5 0 0 0 0.1,0.4 c 0,0.1 0,0.3 0.1,0.4 0.2,0.8 0.6,1.5 1.1,2 0.5,0.6 1.3,0.9 2.1,0.9 0.9,0 1.7,-0.2 2.3,-0.6 0.6,-0.5 1,-1.3 1,-2.3 0,-1.2 -0.4,-2 -1.1,-2.5 -0.7,-0.5 -1.5,-0.6 -2.2,-0.6 -0.9,0 -1.7,0.6 -2.3,1.1 -0.2,0.2 -0.2,0.2 -0.3,0.3 -0.1,-0.9 -0.1,-1.8 0,-2.3 0.5,-1.7 1.5,-2.4 2.4,-2.7 0.9,-0.4 1.7,-0.3 1.7,-0.3 a 0.5,0.5 0 1 0 0.1,-1 z m -1.5,5.9 c 0.6,0 1.2,0.1 1.6,0.4 0.4,0.3 0.7,0.8 0.7,1.7 0,0.8 -0.2,1.2 -0.6,1.5 C 14.1,16.8 13.4,17 12.7,17 c -0.6,0 -1,-0.2 -1.4,-0.6 -0.4,-0.4 -0.7,-1 -0.9,-1.6 0,-0.1 0,-0.1 0,-0.2 0.1,-0.1 0.3,-0.3 0.8,-0.7 0.6,-0.4 1.3,-0.8 1.7,-0.9 z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="tool is-button" id="katako-tool" title="Katako frame">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="M 10,3 A 0.5,0.5 0 0 0 9.6,3.1 L 2.2,9 a 0.5,0.5 0 0 0 0,0.8 l 7.5,6 a 0.5,0.5 0 0 0 0.6,0 l 7.5,-6 a 0.5,0.5 0 0 0 0,-0.8 L 10.4,3 a 0.5,0.5 0 0 0 -0.3,-0.2 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 z M 10,4 17,9.5 10,14.8 3.3,9.5 Z" />
+              </svg>
+              <svg class="svg-icon icon-xsmall" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+                <path d="m 0.5,0 a 0.5,0.5 0 0 0 -0.4,0.8 l 3,5 a 0.5,0.5 0 0 0 0.9,0 l 3,-5 A 0.5,0.5 0 1 0 6.1,0.2 L 3.5,4.5 0.9,0.2 a 0.5,0.5 0 0 0 -0.5,-0.2 z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool is-button is-activatable" title="Stitch N" id="stitchn-tool">
+          <div class="icon-container">
+            <svg id="stitchn-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 2,2 a 1,1 0 1 0 0,2 H 18 a 1,1 0 1 0 0,-2 z" />
+              <path d="M 15.5,7 A 0.5,0.5 0 0 0 15,7.5 V 15.7 L 9.9,7.2 A 0.5,0.5 0 0 0 9,7.5 V 17.5 a 0.5,0.5 0 1 0 1,0 V 9.3 L 15.1,17.8 A 0.5,0.5 0 0 0 16,17.5 V 7.5 A 0.5,0.5 0 0 0 15.5,7 Z" />
+            </svg>
+            <svg class="svg-icon icon-xsmall" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+              <path d="m 0.5,0 a 0.5,0.5 0 0 0 -0.4,0.8 l 3,5 a 0.5,0.5 0 0 0 0.9,0 l 3,-5 A 0.5,0.5 0 1 0 6.1,0.2 L 3.5,4.5 0.9,0.2 a 0.5,0.5 0 0 0 -0.5,-0.2 z" />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="toolbar-item">
+
+        <div class="toolset-separator"></div>
+
+        <div class="toolset">
+          <div class="tool is-button" title="Switch to next pivot" id="pivot-next-tool">
+            <div class="icon-container">
+              <svg id="pivot-next-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="m 3.4,8.9 c -1.1,0 -2,0.9 -2,2 0,1.1 0.9,2 2,2 1.1,0 2,-0.9 2,-2 0,-1.1 -0.9,-2 -2,-2 z m 0,1 c 0.6,0 1,0.5 1,1 0,0.6 -0.5,1 -1,1 -0.6,0 -1,-0.5 -1,-1 0,-0.6 0.5,-1 1,-1 z" />
+                <path d="m 11,1.2 c -1.1,0 -2,0.9 -2,2 0,1.1 0.9,2 2,2 1.1,0 2,-0.9 2,-2 0,-1.1 -0.9,-2 -2,-2 z m 0,1 c 0.6,0 1,0.5 1,1 0,0.6 -0.5,1 -1,1 -0.6,0 -1,-0.5 -1,-1 0,-0.6 0.5,-1 1,-1 z" />
+                <path d="M 2.5,3 A 0.5,0.5 0 0 0 2,3.5 v 3 A 0.5,0.5 0 0 0 2.5,7 h 3 a 0.5,0.5 0 1 0 0,-1 H 3 V 3.5 A 0.5,0.5 0 0 0 2.5,3 Z" />
+                <path d="m 6.5,2 a 0.5,0.5 0 0 0 -0.3,0.2 l -4,4 a 0.5,0.5 0 1 0 0.7,0.7 l 4,-4 A 0.5,0.5 0 0 0 6.5,2 Z" />
+                <path d="m 11,2.5 a 0.5,0.5 0 0 0 -0.4,0.2 L 3.1,10.7 a 0.5,0.5 0 0 0 0,0.7 l 7,7.5 a 0.5,0.5 0 0 0 0.7,0 l 7.5,-7.5 a 0.5,0.5 0 0 0 0,-0.7 L 11.4,2.7 a 0.5,0.5 0 0 0 -0.3,-0.2 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 z m 0,1.3 6.3,7.2 L 10.5,17.8 4.2,11 Z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="toolbar-item">
+      <div class="toolset-separator"></div>
+      <div class="toolset">
+        <div class="tool is-button" title="Color" id="stitch-color-tool">
+          <div class="icon-container">
+            <div class="color-frame">
+              <div class="color-button is-button" id="stitch-color-button-tool" title="red" style="background: #ff0000;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-arrow tool is-button" target="stitch-color-dropdown" id="stitch-color-dropdown-tool">
+          <svg id="fill-grain-icon" class="svg-icon icon-xsmall" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+            <path d="m 0.5,0 a 0.5,0.5 0 0 0 -0.4,0.8 l 3,5 a 0.5,0.5 0 0 0 0.9,0 l 3,-5 A 0.5,0.5 0 1 0 6.1,0.2 L 3.5,4.5 0.9,0.2 a 0.5,0.5 0 0 0 -0.5,-0.2 z" />
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="toolbar-item">
+      <div class="toolset-separator"></div>
+      <div class="toolset">
+
+        <div class="tool is-button" title="Move selected" id="move-tool">
+          <div class="icon-container">
+            <svg id="move-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 8.5,1 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 A 0.5,0.5 0 0 0 8.1,1.2 0.5,0.5 0 0 0 8,1.6 V 17.5 A 0.5,0.5 0 0 0 8.5,18 h 10 a 0.5,0.5 0 0 0 0.5,-0.5 v -16 a 0.5,0.5 0 0 0 -0.5,-0.5 H 8.6 A 0.5,0.5 0 0 0 8.5,1 Z M 9,2 h 9 V 17 H 9 Z" />
+              <path d="m 1.5,17 a 0.5,0.5 0 1 0 0,1 h 4.4 a 0.5,0.5 0 1 0 0,-1 z" />
+              <path d="m 1.5,14 a 0.5,0.5 0 1 0 0,1 h 4.4 a 0.5,0.5 0 1 0 0,-1 z" />
+              <path d="m 1.5,11 a 0.5,0.5 0 1 0 0,1 h 4.4 a 0.5,0.5 0 1 0 0,-1 z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool is-button" title="Make array" id="array-tool">
+          <div class="icon-container">
+            <svg id="array-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 10.5,10 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.1 0.5,0.5 0 0 0 -0.1,0.4 V 17.5 a 0.5,0.5 0 0 0 0.5,0.5 h 7 a 0.5,0.5 0 0 0 0.5,-0.5 v -7 a 0.5,0.5 0 0 0 -0.5,-0.5 H 10.6 A 0.5,0.5 0 0 0 10.5,10 Z M 11,11 h 6 v 6 h -6 z" />
+              <path d="m 6.5,6 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.1 0.5,0.5 0 0 0 -0.1,0.4 V 13.5 a 0.5,0.5 0 0 0 0.5,0.5 h 4 a 0.5,0.5 0 1 0 0,-1 H 7 V 7 h 6 v 3.5 a 0.5,0.5 0 1 0 1,0 v -4 a 0.5,0.5 0 0 0 -0.5,-0.5 H 6.6 A 0.5,0.5 0 0 0 6.5,6 Z" />
+              <path d="m 2.5,2 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 V 9.5 a 0.5,0.5 0 0 0 0.5,0.5 h 4 a 0.5,0.5 0 1 0 0,-1 h -3.5 V 3 h 6 v 3.5 a 0.5,0.5 0 1 0 1,0 v -4 A 0.5,0.5 0 0 0 9.5,2 H 2.6 A 0.5,0.5 0 0 0 2.5,2 Z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool is-button" title="Group" id="group-group-tool">
+          <div class="icon-container">
+            <svg id="group-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 1.5,9 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 L 1,18.5 A 0.5,0.5 0 0 0 1.5,19 H 14.5 a 0.5,0.5 0 0 0 0.5,-0.5 V 9.5 a 0.5,0.5 0 0 0 -0.5,-0.5 H 1.6 A 0.5,0.5 0 0 0 1.5,9 Z M 2,10 H 14 l 0,8 H 2 Z" />
+              <path d="m 13.5,1 c -3,0 -5.5,2.5 -5.5,5.5 0,3 2.5,5.5 5.5,5.5 3,0 5.5,-2.5 5.5,-5.5 0,-3 -2.5,-5.5 -5.5,-5.5 z m 0,1 c 2.5,0 4.5,2 4.5,4.5 0,2.5 -2,4.5 -4.5,4.5 -2.5,0 -4.5,-2 -4.5,-4.5 0,-2.5 2,-4.5 4.5,-4.5 z" />
+            </svg>
+          </div>
+        </div>
+        <div class="tool is-button" title="Ungroup" id="group-ungroup-tool">
+          <div class="icon-container">
+            <svg id="ungroup-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 1.5,9 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 L 1,18.5 A 0.5,0.5 0 0 0 1.5,19 H 14.5 a 0.5,0.5 0 0 0 0.5,-0.5 V 9.5 a 0.5,0.5 0 0 0 -0.5,-0.5 H 1.6 A 0.5,0.5 0 0 0 1.5,9 Z M 2,10 H 14 l 0,8 H 2 Z" />
+              <path d="m 13.5,1 c -3,0 -5.5,2.5 -5.5,5.5 0,3 2.5,5.5 5.5,5.5 3,0 5.5,-2.5 5.5,-5.5 0,-3 -2.5,-5.5 -5.5,-5.5 z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="toolset-separator"></div>
+
+        <div class="tool is-button is-activatable" title="Insert pivot" id="pivot-insert-tool">
+          <div class="icon-container">
+            <svg id="pivot-insert-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 3.4,8.9 c -1.1,0 -2,0.9 -2,2 0,1.1 0.9,2 2,2 1.1,0 2,-0.9 2,-2 0,-1.1 -0.9,-2 -2,-2 z m 0,1 c 0.6,0 1,0.5 1,1 0,0.6 -0.5,1 -1,1 -0.6,0 -1,-0.5 -1,-1 0,-0.6 0.5,-1 1,-1 z" />
+              <path d="m 11,1.2 c -1.1,0 -2,0.9 -2,2 0,1.1 0.9,2 2,2 1.1,0 2,-0.9 2,-2 0,-1.1 -0.9,-2 -2,-2 z m 0,1 c 0.6,0 1,0.5 1,1 0,0.6 -0.5,1 -1,1 -0.6,0 -1,-0.5 -1,-1 0,-0.6 0.5,-1 1,-1 z" />
+              <path d="m 11,2.5 a 0.5,0.5 0 0 0 -0.4,0.2 L 3.1,10.7 a 0.5,0.5 0 0 0 0,0.7 l 7,7.5 a 0.5,0.5 0 0 0 0.7,0 l 7.5,-7.5 a 0.5,0.5 0 0 0 0,-0.7 L 11.4,2.7 a 0.5,0.5 0 0 0 -0.3,-0.2 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 z m 0,1.3 6.3,7.2 L 10.5,17.8 4.2,11 Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="tool is-button is-activatable" title="Delete pivot" id="pivot-delete-tool">
+          <div class="icon-container">
+            <svg id="pivot-delete-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 3.4,8.9 c -1.1,0 -2,0.9 -2,2 0,1.1 0.9,2 2,2 1.1,0 2,-0.9 2,-2 0,-1.1 -0.9,-2 -2,-2 z m 0,1 c 0.6,0 1,0.5 1,1 0,0.6 -0.5,1 -1,1 -0.6,0 -1,-0.5 -1,-1 0,-0.6 0.5,-1 1,-1 z" />
+              <path d="m 11,1.2 c -1.1,0 -2,0.9 -2,2 0,1.1 0.9,2 2,2 1.1,0 2,-0.9 2,-2 0,-1.1 -0.9,-2 -2,-2 z m 0,1 c 0.6,0 1,0.5 1,1 0,0.6 -0.5,1 -1,1 -0.6,0 -1,-0.5 -1,-1 0,-0.6 0.5,-1 1,-1 z" />
+              <path d="m 11,2.5 a 0.5,0.5 0 0 0 -0.4,0.2 L 3.1,10.7 a 0.5,0.5 0 0 0 0,0.7 l 7,7.5 a 0.5,0.5 0 0 0 0.7,0 l 7.5,-7.5 a 0.5,0.5 0 0 0 0,-0.7 L 11.4,2.7 a 0.5,0.5 0 0 0 -0.3,-0.2 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 z m 0,1.3 6.3,7.2 L 10.5,17.8 4.2,11 Z" />
+              <path d="M 12.5,8 8,12.5 8.75,13.5 13,8.75 Z" />
+              <path d="M 9,8.5 8.2,9 12.5,13 13,12.5 Z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </nav>
+
+  <div id="ui">
+
+    <div class="tool-dropdown-dialog msgbox-top is-hidden" id="msgbox-dialog">
+      <div class="tool-dropdown-content">
+        <div class="array-dropdown-items">
+          <table class="dropdown-items">
+            <tr>
+              <td class="title tool-label" id="msgbox-title">Title</td>
+            </tr>
+            <tr>
+              <td class="tool-label" id="msgbox-text" style="white-space: pre;"></td>
+            </tr>
+          </table>
+          <div class="box-buttons">
+            <div class="tool is-button ok-button" id="msgbox-ok-tool" tabindex="0">OK</div>
+            <div class="tool is-button cancel-button" id="msgbox-cancel-tool" tabindex="0">Cancel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-dialog msgbox-top is-hidden" id="input-dialog">
+      <div class="tool-dropdown-content">
+        <div class="array-dropdown-items">
+          <table class="dropdown-items">
+            <tr>
+              <td class="title tool-label" id="name-input-title" colspan="2">Title</td>
+            </tr>
+            <tr>
+              <td class="tool-label">Name</td>
+              <td><input type="text" class="input-value" id="name-input" placeholder="Input name"></td>
+            </tr>
+            <tr>
+              <td class="tool-label" id="name-input-message" colspan="2"></td>
+            </tr>
+          </table>
+          <div class="box-buttons">
+            <div class="tool is-button ok-button" id="name-ok-tool" tabindex="0">OK</div>
+            <div class="tool is-button cancel-button" id="name-cancel-tool" tabindex="0">Cancel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-dialog is-hidden" id="save-fp-dialog">
+      <div class="tool-dropdown-content">
+        <div class="array-dropdown-items">
+          <table class="dropdown-items">
+            <tr>
+              <td colspan="2" class="title tool-label">Save</td>
+            </tr>
+            <tr id="save-fp-name">
+              <td class="tool-label">File name</td>
+              <td><input type="text" class="input-value" id="save-name-input" style="width: 200px;" placeholder="Input name"></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="checkbox" id="save-bounds-setting-use">
+                <label class="tool-label" for="save-bounds-setting-use">Use bounds</label>
+              </td>
+            </tr>
+            <tr>
+              <td cospan="2">
+                <input type="checkbox" id="save-for-printing">
+                <label class="tool-label" for="save-for-printing">For printing</label>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="checkbox" id="save-no-data">
+                <label class="tool-label" for="save-no-data">No data to open</label>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="checkbox" id="save-grid-number">
+                <label class="tool-label" for="save-grid-number">Grid numbering</label>
+              </td>
+            </tr>
+          </table>
+          <div class="box-buttons">
+            <div class="tool is-button ok-button" id="save-ok-tool" tabindex="0">OK</div>
+            <div class="tool is-button cancel-button" id="save-cancel-tool" tabindex="0">Cancel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="pdf-export-dialog" style="width:350px;">
+      <div class="tool-dropdown-content">
+        <div class="array-dropdown-items">
+          <table class="dropdown-items">
+            <tr>
+              <td colspan="2" class="title tool-label">PDF export</td>
+            </tr>
+            <tr id="pdf-export-name-part">
+              <td class="tool-label">File name</td>
+              <td><input type="text" class="input-value" id="pdf-export-name-input" style="width: 200px;" placeholder="Input name"></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="checkbox" id="pdf-export-use-bounds">
+                <label class="tool-label" for="pdf-export-use-bounds">Use bounds</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2">
+                <input type="checkbox" id="pdf-export-grid-number" checked>
+                <label class="tool-label" for="pdf-export-grid-number">Grid numbering</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2" class="title tool-label">Paper</td>
+            </tr>
+
+            <tr>
+              <td>
+                <span class="tool-label">Paper size</span>
+              </td>
+              <td>
+                <select id="pdf-export-paper-size">
+                  <option>A0</option>
+                  <option>A1</option>
+                  <option>A2</option>
+                  <option>A3</option>
+                  <option selected>A4</option>
+                  <option>A5</option>
+                  <option>B0</option>
+                  <option>B1</option>
+                  <option>B2</option>
+                  <option>B3</option>
+                  <option>B4</option>
+                  <option>B5</option>
+                  <option>Legal</option>
+                  <option>Letter</option>
+                  <option>Tabloid</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td cospan="2">
+                <input type="checkbox" id="pdf-export-landscape">
+                <label class="tool-label" for="pdf-export-landscape">Landscape</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2" class="title tool-label">Margin</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="tool-label">Left [mm]</span>
+              </td>
+              <td>
+                <input type="number" class="input-value" id="pdf-export-margin-left" min="0" step="0.1" value="10">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="tool-label">Right [mm]</span>
+              </td>
+              <td>
+                <input type="number" class="input-value" id="pdf-export-margin-right" min="0" step="0.1" value="10">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="tool-label">Top [mm]</span>
+              </td>
+              <td>
+                <input type="number" class="input-value" id="pdf-export-margin-top" min="0" step="0.1" value="17">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="tool-label">Bottom [mm]</span>
+              </td>
+              <td>
+                <input type="number" class="input-value" id="pdf-export-margin-bottom" min="0" step="0.1" value="12">
+              </td>
+            </tr>
+            <tr id="pdf-font">
+              <td colspan="2" class="title tool-label">Font</td>
+            </tr>
+            <tr id="pdf-font-multibyte">
+              <td>
+                <span class="tool-label">Multibyte</span>
+              </td>
+              <td>
+                <input type="button" class="input-value" id="pdf-export-font-multibyte" value="Select">
+              </td>
+            </tr>
+          </table>
+          <table class="dropdown-items">
+            <tr>
+              <td colspan="2">
+                <div class="tool is-button" id="pdf-export-load-default-tool">Default value</div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div class="tool is-button" id="pdf-export-default-tool" tabindex="0">Save as default</div>
+              </td>
+            </tr>
+          </table>
+          <div class="box-buttons">
+            <div class="tool is-button ok-button" id="pdf-export-ok-tool" tabindex="0">OK</div>
+            <div class="tool is-button cancel-button" id="pdf-export-cancel-tool" tabindex="0">Cancel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-context is-hidden" id="context-dropdown">
+      <div class="tool-dropdown-content">
+        <div class="array-dropdown-items" id="context-list">
+
+          <div class="tool is-button" id="context-undo-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              </svg>
+            </div>
+            <span class="tool-label">Undo</span>
+          </div>
+
+          <div class="tool is-button" id="context-redo-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              </svg>
+            </div>
+            <span class="tool-label">Redo</span>
+          </div>
+
+          <div class="dropdown-separator"></div>
+
+          <div class="tool is-button" id="context-cut-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              </svg>
+            </div>
+            <span class="tool-label">Cut</span>
+          </div>
+
+          <div class="tool is-button" id="context-copy-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              </svg>
+            </div>
+            <span class="tool-label">Copy</span>
+          </div>
+
+          <div class="tool is-button" id="context-paste-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              </svg>
+            </div>
+            <span class="tool-label">Paste</span>
+          </div>
+
+          <div class="dropdown-separator"></div>
+
+          <div class="tool is-button" id="context-delete-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              </svg>
+            </div>
+            <span class="tool-label">Delete</span>
+          </div>
+
+          <div class="dropdown-separator"></div>
+
+          <div class="tool is-button" id="move-to-layer-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              </svg>
+            </div>
+            <span class="tool-label">Move to layer...</span>
+          </div>
+
+          <div class="dropdown-separator"></div>
+
+          <div class="tool is-button" id="context-selection-as-template-tool">
+            <div class="icon-container">
+              <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              </svg>
+            </div>
+            <span class="tool-label">Export selection as template</span>
+          </div>
+
+          <div id="context-group-menu">
+
+            <div class="dropdown-separator"></div>
+
+            <div class="tool is-button" id="context-group-group-tool">
+              <div class="icon-container">
+                <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                </svg>
+              </div>
+              <span class="tool-label">Group</span>
+            </div>
+
+            <div class="tool is-button" id="context-group-ungroup-tool">
+              <div class="icon-container">
+                <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                </svg>
+              </div>
+              <span class="tool-label">Ungroup</span>
+            </div>
+
+            <div class="dropdown-separator"></div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  <div class="tool-dropdown-dialog is-hidden" id="about-dialog">
+    <div class="tool-dropdown-content">
+      <div class="array-dropdown-items">
+
+        <div class="title tool-label">About Kogin</div>
+
+        <div class="tool-label">
+          <span id="about-text">Kogin for Kogin-zashi and Hishi-zashi.</span>
+        </div>
+        <div class="tool-label">
+          <a href="" target="_blank" id="project-url">Kogin repository</a>
+        </div>
+
+        <div style="margin: 5px;">
+          Kogin uses the following libraries.
+          <div id="about-tauri">
+            <a href="https://tauri.app/" target="_blank">TAURI</a>
+          </div>
+          <div>
+            <a href="http://paperjs.org/license/" target="_parent">Paper.js</a>
+          </div>
+          <div>
+            <a href="https://github.com/Hopding/pdf-lib/blob/master/LICENSE.md" target="_blank">PDF-Lib</a>
+          </div>
+          <div>
+            <a href="https://github.com/foliojs/fontkit" target="_blank">fontkit</a>
+          </div>
+          <div id="about-jszip">
+            <a href="https://github.com/Stuk/jszip/blob/main/LICENSE.markdown" target="_blank">JSZip</a>
+          </div>
+          <div id="about-google-api">
+            <a href="https://github.com/google/google-api-javascript-client/blob/master/LICENSE" target="_blank">Google Client API</a>
+          </div>
+          <div id="about-dropbox">
+            <a href="https://github.com/dropbox/dropbox-sdk-js/" target="_blank">dropbox-sdk-js</a>
+          </div>
+        </div>
+
+        <div class="box-buttons">
+          <div class="tool is-button ok-button" id="about-close-tool" tabindex="0">Close</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <nav id="bottombar" class="toolbar">
+    <div class="toolbar-item">
+
+      <div class="toolset">
+        <div class="tool is-button" title="Layer lock state" id="layer-lock-tool">
+          <div class="icon-container">
+            <svg id="layer-lock-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <g id="layer-lock-part" class="is-hidden">
+                <path d="m 2.5,9 a 0.5,0.5 0 0 0 -0.2,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 v 8.9 a 0.5,0.5 0 0 0 0.5,0.5 l 14,0 a 0.5,0.5 0 0 0 0.5,-0.5 V 9.5 a 0.5,0.5 0 0 0 -0.5,-0.5 L 2.6,9 A 0.5,0.5 0 0 0 2.5,9 Z M 3,10 16,10 v 8 L 3,18 Z" />
+                <path d="M 9.5,1 C 7.3,1 6.1,2.2 5.6,3.3 5,4.4 5,5.5 5,5.5 v 4 a 0.5,0.5 0 1 0 1,0 v -4 c 0,0 0,-0.9 0.4,-1.8 C 6.9,2.8 7.7,2 9.5,2 11.3,2 12.1,2.8 12.6,3.7 13,4.6 13,5.5 13,5.5 a 0.5,0.5 0 0 0 0,0 l 0,4 a 0.5,0.5 0 1 0 1,0 l 0,-4 c 0,0 0,-1.1 -0.6,-2.2 C 12.9,2.2 11.7,1 9.5,1 Z" />
+                <path d="m 9.2,12 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.1,0 -0.2,0 a 0.5,0.5 0 0 0 -0.4,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 v 2.9 a 0.5,0.5 0 0 0 0.5,0.5 l 2,0 a 0.5,0.5 0 0 0 0.5,-0.5 l 0,-3 A 0.5,0.5 0 0 0 10.5,12 c -0.4,0 -0.9,0 -1.3,0 z m 0,1 c 0.2,0 0.5,0 0.8,0 l 0,2 -1,0 v -2 c 0.1,0 0.1,0 0.2,0 z" />
+              </g>
+              <g id="layer-unlock-part">
+                <path d="m 2.5,9 a 0.5,0.5 0 0 0 -0.2,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 v 8.9 a 0.5,0.5 0 0 0 0.5,0.5 l 14,0 a 0.5,0.5 0 0 0 0.5,-0.5 V 9.5 a 0.5,0.5 0 0 0 -0.5,-0.5 L 2.6,9 A 0.5,0.5 0 0 0 2.5,9 Z M 3,10 16,10 v 8 L 3,18 Z" />
+                <path d="M 9.5,1 C 7.3,1 6.1,2.2 5.6,3.3 5,4.4 5,5.5 5,5.5 a 0.5,0.5 0 1 0 1,0 c 0,0 0,-0.9 0.4,-1.8 C 6.9,2.8 7.7,2 9.5,2 11.3,2 12.1,2.8 12.6,3.7 13,4.6 13,5.5 13,5.5 a 0.5,0.5 0 0 0 0,0 l 0,4 a 0.5,0.5 0 1 0 1,0 L 14,5.5 c 0,0 0,-1.1 -0.6,-2.2 C 12.9,2.2 11.7,1 9.5,1 Z" />
+                <path d="m 9.2,12 c -0.2,0 -0.4,0 -0.5,0 -0.1,0 -0.1,0 -0.2,0 a 0.5,0.5 0 0 0 -0.4,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 v 2.9 a 0.5,0.5 0 0 0 0.5,0.5 l 2,0 a 0.5,0.5 0 0 0 0.5,-0.5 l 0,-3 A 0.5,0.5 0 0 0 10.5,12 c -0.4,0 -0.9,0 -1.3,0 z m 0,1 c 0.2,0 0.5,0 0.8,0 l 0,2 -1,0 v -2 c 0.1,0 0.1,0 0.2,0 z" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool is-button" title="Layer visibility" id="layer-visible-tool">
+          <div class="icon-container">
+            <svg id="layer-shown-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <g id="layer-visible-part">
+                <path d="m 9.5,6.8 c -3.5,0 -6.5,2.5 -6.5,5.6 0,3 3,5.6 6.5,5.6 3.5,0 6.5,-2.5 6.5,-5.6 0,-3 -3,-5.6 -6.5,-5.6 z m 0,1 c 3,0 5.5,2.1 5.5,4.6 0,2.5 -2.4,4.6 -5.5,4.6 -3.1,0 -5.5,-2.1 -5.5,-4.6 0,-2.5 2.4,-4.6 5.5,-4.6 z" />
+                <path d="M 2.3,2.3 A 0.5,0.5 0 0 0 1.9,3 L 4.6,6.9 A 0.5,0.5 0 1 0 5.4,6.3 L 2.7,2.5 A 0.5,0.5 0 0 0 2.3,2.3 Z" />
+                <path d="m 17,2.3 a 0.5,0.5 0 0 0 -0.4,0.2 l -2.7,3.8 a 0.5,0.5 0 1 0 0.8,0.6 L 17.4,3.1 A 0.5,0.5 0 0 0 17,2.3 Z" />
+                <path d="M 6.3,1 A 0.5,0.5 0 0 0 5.8,1.7 L 7.2,5.5 A 0.5,0.5 0 1 0 8.1,5.2 L 6.8,1.3 A 0.5,0.5 0 0 0 6.3,1 Z" />
+                <path d="M 13,1 A 0.5,0.5 0 0 0 12.5,1.3 l -1.3,3.8 a 0.5,0.5 0 1 0 0.9,0.3 L 13.4,1.7 A 0.5,0.5 0 0 0 13,1 Z" />
+              </g>
+              <g id="layer-hidden-part" class="is-hidden">
+                <path d="m 8.3,6.9 a 0.5,0.5 0 0 0 0,0 C 7.9,7 7.5,7 7.2,7.2 A 0.5,0.5 0 1 0 7.5,8.1 C 7.8,8 8,8 8.4,7.9 A 0.5,0.5 0 0 0 8.3,6.9 Z M 11.3,7 A 0.5,0.5 0 0 0 11.2,8 c 0.3,0.1 0.6,0.2 0.9,0.3 A 0.5,0.5 0 1 0 12.4,7.4 C 12.1,7.2 11.8,7.1 11.4,7 A 0.5,0.5 0 0 0 11.3,7 Z M 4.8,8.7 A 0.5,0.5 0 0 0 4.5,8.9 C 4.2,9.1 4,9.4 3.8,9.7 A 0.5,0.5 0 1 0 4.6,10.3 C 4.8,10 5,9.8 5.2,9.6 A 0.5,0.5 0 0 0 4.8,8.7 Z m 9.7,0.4 a 0.5,0.5 0 0 0 -0.4,0.8 c 0.2,0.2 0.3,0.5 0.5,0.8 a 0.5,0.5 0 1 0 0.9,-0.4 C 15.4,9.9 15.2,9.6 15,9.3 A 0.5,0.5 0 0 0 14.5,9.1 Z m 1,2.8 a 0.5,0.5 0 0 0 -0.5,0.5 c 0,0.3 0,0.6 -0.1,0.9 a 0.5,0.5 0 1 0 1,0.2 c 0.1,-0.4 0.1,-0.7 0.1,-1.1 A 0.5,0.5 0 0 0 15.5,11.9 Z M 3.5,12.4 a 0.5,0.5 0 0 0 -0.5,0.6 c 0,0.4 0.1,0.7 0.2,1.1 A 0.5,0.5 0 1 0 4.2,13.7 C 4.1,13.4 4.1,13.1 4,12.8 A 0.5,0.5 0 0 0 3.5,12.4 Z m 10.4,3 a 0.5,0.5 0 0 0 -0.4,0.1 c -0.2,0.2 -0.5,0.4 -0.7,0.5 a 0.5,0.5 0 1 0 0.5,0.8 c 0.3,-0.2 0.6,-0.4 0.9,-0.7 a 0.5,0.5 0 0 0 -0.3,-0.9 z m -8.4,0.3 A 0.5,0.5 0 0 0 5.2,16.6 C 5.5,16.8 5.8,17 6.2,17.2 A 0.5,0.5 0 1 0 6.6,16.3 C 6.3,16.2 6.1,16 5.8,15.8 A 0.5,0.5 0 0 0 5.5,15.7 Z m 4.7,1.3 a 0.5,0.5 0 0 0 0,0 c -0.3,0 -0.6,0 -0.9,0 a 0.5,0.5 0 1 0 0,1 c 0.4,0 0.7,0 1.1,0 a 0.5,0.5 0 0 0 -0.1,-1 z" />
+                <path d="M 2.3,2.3 A 0.5,0.5 0 0 0 1.9,3 L 4.6,6.9 A 0.5,0.5 0 1 0 5.4,6.3 L 2.7,2.5 A 0.5,0.5 0 0 0 2.3,2.3 Z" />
+                <path d="m 17,2.3 a 0.5,0.5 0 0 0 -0.4,0.2 l -2.7,3.8 a 0.5,0.5 0 1 0 0.8,0.6 L 17.4,3.1 A 0.5,0.5 0 0 0 17,2.3 Z" />
+                <path d="M 6.3,1 A 0.5,0.5 0 0 0 5.8,1.7 L 7.2,5.5 A 0.5,0.5 0 1 0 8,5.2 L 6.8,1.3 A 0.5,0.5 0 0 0 6.3,1 Z" />
+                <path d="M 13,1 A 0.5,0.5 0 0 0 12.5,1.3 l -1.3,3.8 a 0.5,0.5 0 1 0 0.9,0.3 L 13.4,1.7 A 0.5,0.5 0 0 0 13,1 Z" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <div class="toolgroup is-hoverable">
+
+            <div class="tool is-button" title="Layer" id="layer-current-container">
+              <div class="layer-switcher" id="layer-current-tool">
+                <span id="layer-current-name" style="width: 100px;">Layer 1</span>
+                <svg id="layer-switcher-dropdown-icon" class="svg-icon icon-xsmall" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+                  <path d="m 0.5,6 a 0.5,0.5 0 0 1 -0.4,-0.8 l 3,-5 a 0.5,0.5 0 0 1 0.9,0 l 3,5 a 0.5,0.5 0 1 1 -0.9,0.5 L 3.5,1.5 0.9,5.8 a 0.5,0.5 0 0 1 -0.5,0.2 z" />
+                </svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <div class="toolgroup is-hoverable">
+
+            <div class="tool is-button" title="Layer menu" id="layer-menu-tool">
+              <div class="icon-container">
+                <svg id="menu-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="M 4,4 A 0.5,0.5 0 1 0 4,5 H 16 A 0.5,0.5 0 1 0 16,4 Z" />
+                  <path d="m 4,9 a 0.5,0.5 0 1 0 0,1 h 12 a 0.5,0.5 0 1 0 0,-1 z" />
+                  <path d="m 4,14 a 0.5,0.5 0 1 0 0,1 h 12 a 0.5,0.5 0 1 0 0,-1 z" />
+                </svg>
+                <svg id="layer-menu-dropdown-icon" class="svg-icon icon-xsmall" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+                  <path d="m 0.5,6 a 0.5,0.5 0 0 1 -0.4,-0.8 l 3,-5 a 0.5,0.5 0 0 1 0.9,0 l 3,5 a 0.5,0.5 0 1 1 -0.6,0.5 L 3.5,1.5 0.9,5.8 a 0.5,0.5 0 0 1 -0.5,0.2 z" />
+                </svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="toolset-separator"></div>
+
+        <div class="dropdown">
+          <div class="toolgroup is-hoverable">
+
+            <div class="tool is-button dropdown-tool" title="Fill grain" id="view-mode-tool">
+              <div class="icon-container">
+                <svg id="view-mode-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <g id="view-mode-line-grain-icon">
+                    <path d="m 3.5,7 v 0.3 5.6 h 12 V 7 Z" style="fill:#9c9c9c;" />
+                    <path d="M 3,1 V 19 H 4 V 1 Z" />
+                    <path d="m 15,1 v 18 h 1 V 1 Z" />
+                    <path d="M 1,4 V 5 H 18 V 4 Z" />
+                    <path d="m 1,15 v 1 h 17 v -1 z" />
+                    <path d="M 7,1 V 19 H 8 V 1 Z" />
+                    <path d="m 11,1 v 18 h 1 V 1 Z" />
+                  </g>
+                  <g id="view-mode-fill-grain-icon" class="is-hidden">
+                    <path d="M 3.5,4.5 V 5 15.5 h 12 v -11 z" style="fill:#9c9c9c;" />
+                    <path d="M 3,1 V 19 H 4 V 1 Z" />
+                    <path d="m 15,1 v 18 h 1 V 1 Z" />
+                    <path d="M 1,4 V 5 H 18 V 4 Z" />
+                    <path d="m 1,15 v 1 h 17 v -1 z" />
+                    <path d="M 7,1 V 19 H 8 V 1 Z" />
+                    <path d="m 11,1 v 18 h 1 V 1 Z" />
+                  </g>
+                  <g id="view-mode-over-grain-icon" class="is-hidden">
+                    <path d="m 3,1 v 18 h 1 V 1 Z" />
+                    <path d="m 15,1 v 18 h 1 V 1 Z" />
+                    <path d="M 1,4 V 5 H 18 V 4 Z" />
+                    <path d="m 1,15 v 1 H 18 v -1 z" />
+                    <path d="m 7,1 v 18 h 1 V 1 Z" />
+                    <path d="m 11,1 v 18 h 1 V 1 Z" />
+                    <path d="m 3,8 a 2,2 0 1 0 0,4 H 17 a 2,2 0 1 0 0,-4 z" style="fill:#9c9c9c;" />
+                  </g>
+                  <g id="view-mode-over-warp-icon" class="is-hidden">
+                    <path d="M 5,1 V 19 H 6 V 1 Z" />
+                    <path d="M 1,4 V 5 H 18 V 4 Z" />
+                    <path d="m 1,15 v 1 h 17 v -1 z" />
+                    <path d="m 9,1 v 18 h 1 V 1 Z" />
+                    <path d="m 13,1 v 18 h 1 V 1 Z" />
+                    <path d="m 4,8 a 2,2 0 1 0 0,4 h 11 a 2,2 0 1 0 0,-4 z" style="fill:#9c9c9c;" />
+                  </g>
+                </svg>
+                <svg id="view-mode-dropdown-icon" class="svg-icon icon-xsmall" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+                  <path d="m 0.5,6 a 0.5,0.5 0 0 1 -0.4,-0.8 l 3,-5 a 0.5,0.5 0 0 1 0.9,0 l 3,5 a 0.5,0.5 0 1 1 -0.9,0.5 L 3.5,1.5 0.9,5.8 a 0.5,0.5 0 0 1 -0.5,0.2 z" />
+                </svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="toolbar-item">
+          <div class="toolset-separator"></div>
+
+          <div class="toolset">
+
+            <div class="tool is-button is-activatable" title="Grid" id="grid-tool">
+              <div class="icon-container">
+                <svg id="grid-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="m 2.5,2 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0.3 V 17.5 a 0.5,0.5 0 0 0 0.5,0.5 H 17.5 a 0.5,0.5 0 0 0 0.5,-0.5 v -15 a 0.5,0.5 0 0 0 -0.5,-0.5 H 2.6 A 0.5,0.5 0 0 0 2.5,2 Z M 3,3 H 17 V 17 H 3 Z" />
+                  <path d="M 7.5,2.5 A 0.5,0.5 0 0 0 7,3 v 14 a 0.5,0.5 0 1 0 1,0 V 3 A 0.5,0.5 0 0 0 7.5,2.5 Z" />
+                  <path d="M 12.5,2.5 A 0.5,0.5 0 0 0 12,3 v 14 a 0.5,0.5 0 1 0 1,0 V 3 A 0.5,0.5 0 0 0 12.5,2.5 Z" />
+                  <path d="m 3,7 a 0.5,0.5 0 1 0 0,1 H 17 a 0.5,0.5 0 1 0 0,-1 z" />
+                  <path d="m 3,12 a 0.5,0.5 0 1 0 0,1 H 17 a 0.5,0.5 0 1 0 0,-1 z" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="tool is-button is-activatable" title="Crosshair" id="cursor-crosshair-tool">
+              <div class="icon-container">
+                <svg id="crosshair-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="m 10,1 v 17 h 1 V 1 Z" />
+                  <path d="m 2,9 v 1 H 19 V 9 Z" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="tool is-button is-activatable" title="1 to 1 line" id="cursor-1to1-line-tool">
+              <div class="icon-container">
+                <svg id="1to1-line-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="M 17.6,1.6 1.6,17.6 2.4,18.4 18.4,2.4 Z" />
+                  <path d="M 2.4,1.6 1.6,2.4 17.6,18.4 18.4,17.6 Z" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="tool is-button is-activatable" title="1 to 2 line" id="cursor-1to2-line-tool">
+              <div class="icon-container">
+                <svg id="1to2-line-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="M 17.8,5.6 1.8,13.6 2.2,14.4 18.2,6.4 Z" />
+                  <path d="M 2.2,5.6 1.8,6.4 17.8,14.4 18.2,13.6 Z" />
+                </svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="toolset-separator"></div>
+        <div class="toolset">
+          <div class="tool is-button is-activatable" title="Output bounds" id="bounds-tool">
+            <div class="icon-container">
+              <svg id="bounds-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="m 2.5,2 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.1 0.5,0.5 0 0 0 -0.1,0.4 V 17.5 a 0.5,0.5 0 0 0 0.5,0.5 l 15,0 a 0.5,0.5 0 0 0 0.5,-0.5 V 2.5 a 0.5,0.5 0 0 0 -0.5,-0.5 H 2.6 A 0.5,0.5 0 0 0 2.5,2 Z M 3,3 H 17 V 17 L 3,17 Z" />
+                <path d="M 9.8,4 A 0.5,0.5 0 0 0 9.4,4.2 L 4.1,9.9 a 0.5,0.5 0 0 0 0,0.7 L 9.4,16.1 a 0.5,0.5 0 0 0 0.7,0 l 5.8,-5.6 a 0.5,0.5 0 0 0 0,-0.7 L 10.2,4.1 A 0.5,0.5 0 0 0 9.8,4 Z M 9.8,5.2 14.9,10.2 9.8,15.1 5.2,10.2 Z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolset-separator"></div>
+
+        <div class="toolbar-item">
+          <div class="toolset">
+            <div class="tool is-button" title="Zoom in" id="zoom-in-tool">
+              <div class="icon-container">
+                <svg id="zoom-in-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="M 9.5,1 C 4.8,1 1,4.8 1,9.5 c 0,4.7 3.8,8.5 8.5,8.5 4.7,0 8.5,-3.8 8.5,-8.5 C 18,4.8 14.2,1 9.5,1 Z m 0,1 c 4.1,0 7.5,3.4 7.5,7.5 0,4.1 -3.4,7.5 -7.5,7.5 -4.1,0 -7.5,-3.4 -7.5,-7.5 0,-4.1 3.4,-7.5 7.5,-7.5 z" />
+                  <path d="m 15.2,14.6 a 0.5,0.5 0 0 0 -0.4,0.8 l 2.8,2.9 a 0.5,0.5 0 1 0 0.7,-0.7 l -2.8,-2.9 a 0.5,0.5 0 0 0 -0.4,-0.2 z" />
+                  <path d="m 7.5,4 a 0.5,0.5 0 0 0 -0.5,0.5 l 0,2.5 h -2.4 a 0.5,0.5 0 0 0 -0.4,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 V 10.5 a 0.5,0.5 0 0 0 0.5,0.5 h 2.5 v 2.5 a 0.5,0.5 0 0 0 0.5,0.5 h 3 a 0.5,0.5 0 0 0 0.5,-0.5 V 11 h 2.5 a 0.5,0.5 0 0 0 0.5,-0.5 v -3 a 0.5,0.5 0 0 0 -0.5,-0.5 h -2.5 l 0,-2.5 a 0.5,0.5 0 0 0 -0.5,-0.5 z m 0.5,1 h 2 l 0,2.5 a 0.5,0.5 0 0 0 0.5,0.5 h 2.5 v 2 h -2.5 a 0.5,0.5 0 0 0 -0.5,0.5 V 13 H 8 v -2.5 a 0.5,0.5 0 0 0 -0.5,-0.5 h -2.5 V 8 h 2.5 a 0.5,0.5 0 0 0 0.5,-0.5 z" />
+                </svg>
+              </div>
+            </div>
+            <div class="tool is-button" title="Zoom out" id="zoom-out-tool">
+              <div class="icon-container">
+                <svg id="zoom-out-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="M 9.5,1 C 4.8,1 1,4.8 1,9.5 c 0,4.7 3.8,8.5 8.5,8.5 4.7,0 8.5,-3.8 8.5,-8.5 C 18,4.8 14.2,1 9.5,1 Z m 0,1 c 4.1,0 7.5,3.4 7.5,7.5 0,4.1 -3.4,7.5 -7.5,7.5 -4.1,0 -7.5,-3.4 -7.5,-7.5 0,-4.1 3.4,-7.5 7.5,-7.5 z" />
+                  <path d="m 15.2,14.6 a 0.5,0.5 0 0 0 -0.4,0.8 l 2.8,2.9 a 0.5,0.5 0 1 0 0.7,-0.7 l -2.8,-2.9 a 0.5,0.5 0 0 0 -0.4,-0.2 z" />
+                  <path d="m 4.5,7 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 V 10.5 a 0.5,0.5 0 0 0 0.5,0.5 h 9 a 0.5,0.5 0 0 0 0.5,-0.5 v -3 a 0.5,0.5 0 0 0 -0.5,-0.5 H 4.6 A 0.5,0.5 0 0 0 4.5,7 Z M 5,8 h 8 v 2 H 5 Z" />
+                </svg>
+              </div>
+            </div>
+            <div class="tool is-button" title="Zoom reset" id="zoom-reset-tool">
+              <div class="icon-container">
+                <svg id="zoom-reset-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="M 9.5,1 C 4.8,1 1,4.8 1,9.5 c 0,4.7 3.8,8.5 8.5,8.5 4.7,0 8.5,-3.8 8.5,-8.5 C 18,4.8 14.2,1 9.5,1 Z m 0,1 c 4.1,0 7.5,3.4 7.5,7.5 0,4.1 -3.4,7.5 -7.5,7.5 -4.1,0 -7.5,-3.4 -7.5,-7.5 0,-4.1 3.4,-7.5 7.5,-7.5 z" />
+                  <path d="m 15.2,14.6 a 0.5,0.5 0 0 0 -0.4,0.8 l 2.8,2.9 a 0.5,0.5 0 1 0 0.7,-0.7 l -2.8,-2.9 a 0.5,0.5 0 0 0 -0.4,-0.2 z" />
+                  <path d="M 9.4,8.2 V 9.2" />
+                  <path d="M 9.4,13.2 V 12.2" />
+                  <path d="M 6.3,4.7 A 0.5,0.5 0 0 0 5.8,5.3 v 4 a 0.5,0.5 0 1 0 1,0 v -4 A 0.5,0.5 0 0 0 6.3,4.7 Z" />
+                  <path d="m 12.3,9.7 a 0.5,0.5 0 0 0 -0.5,0.5 v 4 a 0.5,0.5 0 1 0 1,0 v -4 A 0.5,0.5 0 0 0 12.3,9.7 Z" />
+                  <path d="m 12.3,5.7 a 0.5,0.5 0 0 0 -0.3,0.2 L 6,11.9 a 0.5,0.5 0 1 0 0.7,0.7 L 12.7,6.6 a 0.5,0.5 0 0 0 -0.4,-0.9 z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolset-separator"></div>
+
+        <div class="tool is-button" title="To front" id="z-front-tool">
+          <div class="icon-container">
+            <svg id="front-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 1.6,0.9 A 0.5,0.5 0 0 0 1.1,1.4 v 2 a 0.5,0.5 0 0 0 0.5,0.5 H 18.6 a 0.5,0.5 0 0 0 0.5,-0.5 v -2 a 0.5,0.5 0 0 0 -0.5,-0.5 z m 0.5,1 H 18.1 V 2.9 H 2.1 Z" />
+              <path d="M 9.6,5.9 A 0.5,0.5 0 0 0 9.1,6.4 v 2 a 0.5,0.5 0 0 0 0.5,0.5 h 9 a 0.5,0.5 0 0 0 0.5,-0.5 v -2 a 0.5,0.5 0 0 0 -0.5,-0.5 z M 10.1,6.9 H 18.1 v 1 h -8 z" />
+              <path d="M 9.6,10.9 A 0.5,0.5 0 0 0 9.1,11.4 v 2 a 0.5,0.5 0 0 0 0.5,0.5 h 9 a 0.5,0.5 0 0 0 0.5,-0.5 v -2 a 0.5,0.5 0 0 0 -0.5,-0.5 z m 0.5,1 H 18.1 v 1 h -8 z" />
+              <path d="M 9.6,15.9 A 0.5,0.5 0 0 0 9.1,16.4 v 2 a 0.5,0.5 0 0 0 0.5,0.5 h 9 a 0.5,0.5 0 0 0 0.5,-0.5 v -2 a 0.5,0.5 0 0 0 -0.5,-0.5 z m 0.5,1 H 18.1 v 1 h -8 z" />
+              <path d="M 1.6,0.9 C 1.3,0.9 1.1,1.2 1.1,1.4 v 2 c 0,0.3 0.2,0.5 0.5,0.5 H 18.6 c 0.3,0 0.5,-0.2 0.5,-0.5 v -2 c 0,-0.3 -0.2,-0.5 -0.5,-0.5 z" />
+              <path d="M 3.6,6.9 V 17.9 h 1 V 6.9 Z" />
+              <path d="M 4.1,6.2 0.7,9.6 1.4,10.3 4.1,7.6 6.7,10.3 7.4,9.6 Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="tool is-button" title="To front one level" id="z-front-step-tool">
+          <div class="icon-container">
+            <svg id="front-step-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 9.6,11.1 a 0.5,0.5 0 0 0 -0.5,0.5 v 2 a 0.5,0.5 0 0 0 0.5,0.5 h 9 a 0.5,0.5 0 0 0 0.5,-0.5 v -2 a 0.5,0.5 0 0 0 -0.5,-0.5 z m 0.5,1 h 8 v 1 H 10.1 Z" />
+              <path d="m 7.6,16.1 a 0.5,0.5 0 0 0 -0.5,0.5 v 2 a 0.5,0.5 0 0 0 0.5,0.5 H 18.6 a 0.5,0.5 0 0 0 0.5,-0.5 v -2 a 0.5,0.5 0 0 0 -0.5,-0.5 z m 0.5,1 h 10 v 1 H 8.1 Z" />
+              <path d="m 1.6,6.1 c -0.3,0 -0.5,0.2 -0.5,0.5 v 2 c 0,0.3 0.2,0.5 0.5,0.5 H 18.6 c 0.3,0 0.5,-0.2 0.5,-0.5 v -2 c 0,-0.3 -0.2,-0.5 -0.5,-0.5 z" />
+              <path d="m 9.6,1.1 a 0.5,0.5 0 0 0 -0.5,0.5 v 2 a 0.5,0.5 0 0 0 0.5,0.5 H 18.6 A 0.5,0.5 0 0 0 19.1,3.6 v -2 a 0.5,0.5 0 0 0 -0.5,-0.5 z M 10.1,2.1 h 8 v 1 H 10.1 Z" />
+              <path d="m 3.6,18.1 v -6.5 h 1 v 6.5 z" />
+              <path d="M 1.5,14.4 0.8,13.7 4.1,10.3 7.5,13.7 6.8,14.4 4.1,11.8 Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="tool is-button" title="To back one level" id="z-back-step-tool">
+          <div class="icon-container">
+            <svg id="back-step-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 9.6,9.1 a 0.5,0.5 0 0 1 -0.5,-0.5 v -2 a 0.5,0.5 0 0 1 0.5,-0.5 h 9 a 0.5,0.5 0 0 1 0.5,0.5 v 2 a 0.5,0.5 0 0 1 -0.5,0.5 z m 0.5,-1 h 8 v -1 H 10.1 Z" />
+              <path d="m 7.6,4.1 a 0.5,0.5 0 0 1 -0.5,-0.5 v -2 a 0.5,0.5 0 0 1 0.5,-0.5 H 18.6 a 0.5,0.5 0 0 1 0.5,0.5 v 2 a 0.5,0.5 0 0 1 -0.5,0.5 z m 0.5,-1 h 10 v -1 H 8.1 Z" />
+              <path d="m 1.6,14.1 c -0.3,0 -0.5,-0.2 -0.5,-0.5 v -2 c 0,-0.3 0.2,-0.5 0.5,-0.5 H 18.6 c 0.3,0 0.5,0.2 0.5,0.5 v 2 c 0,0.3 -0.2,0.5 -0.5,0.5 z" />
+              <path d="m 9.6,19.1 a 0.5,0.5 0 0 1 -0.5,-0.5 v -2 a 0.5,0.5 0 0 1 0.5,-0.5 H 18.6 A 0.5,0.5 0 0 1 19.1,16.6 v 2 a 0.5,0.5 0 0 1 -0.5,0.5 z M 10.1,18.1 h 8 V 17.1 H 10.1 Z" />
+              <path d="m 3.6,2.1 v 6.5 h 1 v -6.5 z" />
+              <path d="M 1.5,5.7 0.8,6.4 4.1,9.8 7.5,6.4 6.8,5.7 4.1,8.3 Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="tool is-button" title="To back" id="z-back-tool">
+          <div class="icon-container">
+            <svg id="back-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="M 1.6,18.9 A 0.5,0.5 0 0 1 1.1,18.4 v -2 a 0.5,0.5 0 0 1 0.5,-0.5 H 18.6 a 0.5,0.5 0 0 1 0.5,0.5 v 2 a 0.5,0.5 0 0 1 -0.5,0.5 z m 0.5,-1 H 18.1 V 16.9 H 2.1 Z" />
+              <path d="M 9.6,13.9 A 0.5,0.5 0 0 1 9.1,13.4 v -2 a 0.5,0.5 0 0 1 0.5,-0.5 h 9 a 0.5,0.5 0 0 1 0.5,0.5 v 2 a 0.5,0.5 0 0 1 -0.5,0.5 z M 10.1,12.9 H 18.1 v -1 h -8 z" />
+              <path d="M 9.6,8.9 A 0.5,0.5 0 0 1 9.1,8.4 v -2 a 0.5,0.5 0 0 1 0.5,-0.5 h 9 a 0.5,0.5 0 0 1 0.5,0.5 v 2 a 0.5,0.5 0 0 1 -0.5,0.5 z M 10.1,7.9 H 18.1 v -1 h -8 z" />
+              <path d="M 9.6,3.9 A 0.5,0.5 0 0 1 9.1,3.4 v -2 A 0.5,0.5 0 0 1 9.6,0.9 h 9 a 0.5,0.5 0 0 1 0.5,0.5 v 2 a 0.5,0.5 0 0 1 -0.5,0.5 z M 10.1,2.9 H 18.1 v -1 h -8 z" />
+              <path d="M 1.6,18.9 C 1.3,18.9 1.1,18.7 1.1,18.4 v -2 c 0,-0.3 0.2,-0.5 0.5,-0.5 H 18.6 c 0.3,0 0.5,0.2 0.5,0.5 v 2 c 0,0.3 -0.2,0.5 -0.5,0.5 z" />
+              <path d="M 3.6,12.9 V 1.9 h 1 V 12.9 Z" />
+              <path d="M 4.1,13.6 0.7,10.3 1.4,9.6 4.1,12.2 6.7,9.6 7.4,10.3 Z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="toolset-separator"></div>
+
+        <div class="sizer"></div>
+
+        <div class="coordinate tool-label" title="Coordinate" id="grid-coord">
+          <table>
+            <tr>
+              <td>X:</td>
+              <td class="right-align coord-value" id="x-coord">10</td>
+            </tr>
+            <tr>
+              <td>Y:</td>
+              <td class="right-align coord-value" id="y-coord">5</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="toolset-separator"></div>
+
+        <div class="coordinate tool-label" title="Local coordinate" id="grid-local-coord">
+          <table>
+            <tr>
+              <td>dX:</td>
+              <td class="right-align coord-value" id="x-local-coord">10</td>
+            </tr>
+            <tr>
+              <td>dY:</td>
+              <td class="right-align coord-value" id="y-local-coord">5</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="tool is-button" title="Notice" id="notice-tool">
+          <div class="icon-container">
+            <svg id="notice-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+              <path d="m 11.3,16.7 a 1.2,1.2 0 0 1 -1.2,1.2 1.2,1.2 0 0 1 -1.3,-1.2 1.2,1.2 0 0 1 1.3,-1.2 1.2,1.2 0 0 1 1.2,1.2 z" />
+              <path d="m 10,13.7 c 0,0 -2,-5.5 -1.9,-8.1 0.1,-1.1 0.8,-1.9 1.9,-1.9 1.1,0 1.8,0.9 1.8,1.9 0,3 -1.8,8.1 -1.8,8.1 z" />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <div id="templates" class="is-hidden">
+    <div id="templates-header">
+      <table>
+        <tr>
+          <td><span class="tool-label" id="templates-header-title">Templates</span></td>
+          <td class="templates-filter-outer">
+            <input type="text" value="" placeholder="Filter" class="templates-filter-input" id="templates-filter-input">
+            <div class="is-button templates-filter-clear" title="Clear filter" id="templates-filter-clear-tool">
+            <div class="icon-container" style="vertical-align:-webkit-baseline-middle;display: -webkit-inline-flex">
+              <svg id="templates-small-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                <path d="M 14.3,4.7 4.3,14.7 l 0.7,0.7 10,-10 z" />
+                <path d="M 5,4.7 4.3,5.4 l 10,10 0.7,-0.7 z" />
+              </svg>
+            </div>
+            </div>
+          </td>
+          <td>
+            <div class="tool is-button" title="Small" id="templates-small-tool">
+              <div class="icon-container">
+                <svg id="templates-small-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="m 6,8.5 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0.4 V 16 A 0.5,0.5 0 0 0 6.3,16.5 h 7 a 0.5,0.5 0 0 0 0.5,-0.5 V 9 a 0.5,0.5 0 0 0 -0.5,-0.5 H 6.3 a 0.5,0.5 0 0 0 0,0 z M 6.75,9.6 h 6 V 15.5 H 6.75 Z" />
+                </svg>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="tool is-button" title="Medium" id="templates-medium-tool">
+              <div class="icon-container">
+                <svg id="templates-medium-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="M 4.9,6.5 A 0.5,0.5 0 0 0 4.6,6.7 a 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 v 9.9 a 0.5,0.5 0 0 0 0.5,0.5 H 14.9 a 0.5,0.5 0 0 0 0.5,-0.5 V 7 a 0.5,0.5 0 0 0 -0.5,-0.5 H 5 a 0.5,0.5 0 0 0 -0.1,0 z M 5.4,7.5 H 14.4 V 16.5 H 5.4 Z" />
+                </svg>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="tool is-button" title="Large" id="templates-large-tool">
+              <div class="icon-container">
+                <svg id="templates-large-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="m 2.3,2.3 a 0.5,0.5 0 0 0 -0.3,0.1 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 0,0 0.5,0.5 0 0 0 -0.1,0.4 V 17.3 a 0.5,0.5 0 0 0 0.5,0.5 H 17.3 a 0.5,0.5 0 0 0 0.5,-0.5 v -14.5 A 0.5,0.5 0 0 0 17.3,2.3 H 2.4 a 0.5,0.5 0 0 0 -0.1,0 z M 2.8,3.3 H 16.8 V 16.8 H 2.8 Z" />
+                </svg>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div class="tool is-button" title="Add template location" id="templates-add-location-tool">
+              <div class="icon-container">
+                <span style="vertical-align: middle;" class="tool-label">Add location</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="tool is-button" title="Reload" id="templates-reload-tool">
+              <div class="icon-container">
+                <svg id="templates-large-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+                  <path d="M 9.4,2.6 C 5.6,2.4 2.2,5.6 2.1,10.4 c -0.1,2.4 0.7,4.3 2,5.5 1.3,1.2 3.2,1.8 5.3,1.7 2.6,-0.1 4.2,-1.3 5,-2.5 0.8,-1.1 1,-2.3 1,-2.3 L 14.3,12.8 c 0,0 -0.1,0.9 -0.8,1.8 -0.7,0.9 -1.9,1.9 -4.2,2 C 7.4,16.7 5.8,16.2 4.7,15.2 3.6,14.2 3,12.6 3.1,10.4 3.2,6.1 6.1,3.4 9.3,3.6 c 2.6,0.1 3.9,1.3 4.6,2.5 0.7,1.2 0.9,2.3 0.9,2.3 l 1,-0.1 c 0,0 -0.1,-1.4 -1,-2.8 -0.9,-1.4 -2.5,-2.8 -5.4,-3 z" />
+                  <path d="m 18.2,3.5 -1.1,0.4 -7,2.3 5.4,3.4 z" />
+                </svg>
+              </div>
+            </div>
+          </td>
+          <td>
+            <input type="checkbox" id="templates-keep-color">
+            <label for="templates-keep-color" class="tool-label">Keep color</label>
+          </td>
+
+          <td>
+            <div class="tool is-button" title="Choose template" id="templates-choose-tool">
+              <div class="icon-container">
+                <span style="vertical-align: middle;" class="tool-label">Choose</span>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div class="tool is-button" title="Close templates" id="templates-close-tool">
+              <div class="icon-container">
+                <span style="vertical-align: middle;" class="tool-label">Close</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="templates-tabs">
+      <div id="templates-tab-headers"></div>
+      <div id="templates-tab-contents"></div>
+    </div>
+    <div id="scroll-mark" class="is-no-display">
+      <svg id="scroll-mark-icon" viewBox="0 0 32 32" height="32" width="32">
+       <ellipse ry="14.5" rx="14.5" cy="16" cx="16" style="fill:#fff;stroke:#555;stroke-width:1;fill-opacity: 0.6;" />
+       <circle r="2" cy="16" cx="16" style="fill:#333;" />
+       <path d="m 12,11 4,-5.3 4,5.3" style="stroke:#333;stroke-width:2px;fill:none;stroke-linejoin:round;" />
+       <path d="m 12,21.5 4,5.3 4,-5.3" style="stroke:#333;stroke-width:2px;fill:none;stroke-linejoin:round;" />
+      </svg>
+    </div>
+  </div>
+  <input type="file" class="is-hidden" id="template-file-input" accept="image/svg+xml" multiple="true">
+
+  <div class="tool-dropdown-dialog is-hidden templates-dropdown" id="templates-add-location-dialog" style="width: 300px;">
+    <div class="tool-dropdown-content">
+      <div class="array-dropdown-items">
+        <table class="dropdown-items">
+          <tr>
+            <td class="tool-label title" id="templates-add-location-text" colspan="2">Add location</td>
+          </tr>
+          <tr>
+            <td><span class="tool-label">Name</span></td>
+            <td><input type="text" id="templates-name" class="input-value"></td>
+          </tr>
+          <tr>
+            <td>
+              <input type="radio" id="templates-local" name="templates-web-type" checked>
+              <label for="templates-local" class="tool-label">Local</label>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input type="radio" id="templates-github" name="templates-web-type">
+              <label for="templates-github">Github</label>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="tool-label">User</span></td>
+            <td><input type="text" id="templates-github-user" class="input-value"></td>
+          </tr>
+          <tr>
+            <td><span class="tool-label">Repository</span></td>
+            <td><input type="text" id="templates-github-repository" class="input-value"></td>
+          </tr>
+          <tr>
+            <td><span class="tool-label">Sub directory</span></td>
+            <td><input type="text" id="templates-github-subdirectory" class="input-value"></td>
+          </tr>
+          <tr>
+            <td>
+              <input type="radio" id="templates-gitlab" name="templates-web-type">
+              <label for="templates-gitlab">Gitlab</label>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="tool-label">Project ID</span></td>
+            <td><input type="text" id="templates-gitlab-projectid" class="input-value"></td>
+          </tr>
+          <tr>
+            <td><span class="tool-label">Sub directory</span></td>
+            <td><input type="text" id="templates-gitlab-subdirectory" class="input-value"></td>
+          </tr>
+          <tr id="templates-googledrive-row-name">
+            <td>
+              <input type="radio" id="templates-googledrive" name="templates-web-type">
+              <label for="templates-googledrive">Google Drive</label>
+            </td>
+          </tr>
+          <tr id="templates-googledrive-row-folder">
+            <td><span class="tool-label">Folder</span></td>
+            <td><div id="templates-googledrive-folder-tool" class="tool tool-label is-button">Choose</div></td>
+          </tr>
+          <tr id="templates-dropbox-row-type" class="is-no-display">
+            <td>
+              <input type="radio" id="templates-dropbox" name="templates-web-type">
+              <label for="templates-dropbox">Dropbox</label>
+            </td>
+          </tr>
+          <tr id="templates-dropbox-row-folder" class="is-no-display">
+            <td><span class="tool-label">Folder</span></td>
+            <td><div id="templates-dropbox-folder-tool" class="tool tool-label is-button">Choose</div></td>
+          </tr>
+        </table>
+        <div class="box-buttons">
+          <div class="tool is-button ok-button" id="templates-add-location-ok-tool" tabindex="0">OK</div>
+          <div class="tool is-button cancel-button" id="templates-add-location-cancel-tool" tabindex="0">Cancel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-dropdown-templates templates-dropdown is-hidden" id="templates-folder-dropdown">
+    <div class="tool-dropdown-content">
+      <div class="array-dropdown-items" id="folder-list">
+        <div class="tool is-button" id="templates-folder-reload-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Reload</span>
+        </div>
+        <div class="tool is-button" id="templates-folder-rename-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Rename</span>
+        </div>
+        <div class="dropdown-separator"></div>
+        <div class="tool is-button" id="templates-folder-remove-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Remove</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-dropdown-templates templates-dropdown is-hidden" id="templates-dropdown">
+    <div class="tool-dropdown-content">
+      <div class="array-dropdown-items" id="context-list">
+
+        <div class="tool is-button" id="templates-context-reload-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Reload</span>
+        </div>
+        <div class="tool is-button" id="templates-context-rename-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Rename</span>
+        </div>
+
+        <div class="tool is-button" id="templates-context-add-new-file-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Add new file</span>
+        </div>
+
+        <div class="tool is-button" id="templates-context-add-subfolder-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Add subfolder</span>
+        </div>
+
+        <div class="tool is-button" id="templates-context-download-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Download</span>
+        </div>
+
+        <div class="tool is-button" id="templates-context-open-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Open folder</span>
+        </div>
+
+        <div class="tool is-button" id="templates-context-open-web-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Open web site</span>
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="templates-context-clear-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Clear</span>
+        </div>
+
+        <div class="tool is-button" id="templates-context-remove-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Remove</span>
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="templates-context-move-left-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Move to left</span>
+        </div>
+        <div class="tool is-button" id="templates-context-move-right-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Move to right</span>
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="templates-context-information-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Information</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-dropdown-templates templates-dropdown is-hidden" id="templates-item-dropdown">
+    <div class="tool-dropdown-content">
+      <div class="array-dropdown-items" id="context-list">
+
+        <div class="tool is-button" id="templates-item-edit-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Edit</span>
+        </div>
+
+        <div class="tool is-button" id="templates-item-reload-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Reload</span>
+        </div>
+        <div class="tool is-button" id="templates-item-rename-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Rename</span>
+        </div>
+        <div class="tool is-button" id="templates-item-duplicate-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Duplicate</span>
+        </div>
+
+        <div class="tool is-button" id="templates-item-download-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Download</span>
+        </div>
+
+        <div class="dropdown-separator"></div>
+
+        <div class="tool is-button" id="templates-item-remove-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Remove</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-dropdown-templates templates-dropdown is-hidden" id="templates-webitem-dropdown">
+    <div class="tool-dropdown-content">
+      <div class="array-dropdown-items" id="context-list">
+
+        <div class="tool is-button" id="templates-webitem-edit-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Edit</span>
+        </div>
+
+        <div class="tool is-button" id="templates-webitem-download-tool">
+          <div class="icon-container">
+            <svg class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Download</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="is-hidden" id="templates-fp">
+    <div class="tool-dropdown-content">
+      <table class="dropdown-items templates-fp-header" style="margin-bottom: 0;">
+        <tr>
+          <td colspan="3" class="title tool-label" id="templates-fp-open-title">Open template</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="title tool-label" id="templates-fp-save-title">Save as template</td>
+        </tr>
+        <tr id="templates-fp-save-name">
+          <td colspan="3"><span class="tool-label">File name</span>
+          <input class="" type="text" id="templates-fp-filename" style="width: 70%;" placeholder="Input name"></td>
+        </tr>
+      </table>
+      <table class="templates-fp-body">
+        <tr>
+          <td><span class="tool-label">Location</span></td>
+          <td id="templates-fp-name"><span class="tool-label">Name</span>
+            <span style="position: relative; left: 50px;">
+              <svg id="templates-fp-name-downward-icon" class="svg-icon icon-xsmall" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+                <path d="m 0.5,0 a 0.5,0.5 0 0 0 -0.4,0.8 l 3,5 a 0.5,0.5 0 0 0 0.9,0 l 3,-5 A 0.5,0.5 0 1 0 6.1,0.2 L 3.5,4.5 0.9,0.2 a 0.5,0.5 0 0 0 -0.5,-0.2 z" />
+              </svg>
+              <svg id="templates-fp-name-upward-icon" class="svg-icon icon-xsmall is-no-display" fill="currentColor" viewBox="0 0 7 6" height="6" width="7">
+                <path d="m 0.5,6 a 0.5,0.5 0 0 1 -0.4,-0.8 l 3,-5 a 0.5,0.5 0 0 1 0.9,0 l 3,5 a 0.5,0.5 0 1 1 -0.6,0.5 L 3.5,1.5 0.9,5.8 a 0.5,0.5 0 0 1 -0.5,0.2 z" />
+              </svg>
+            </span>
+          </td>
+          <td><span class="tool-label">Preview</span></td>
+        </tr>
+        <tr>
+          <td>
+            <select size="22" class="templates-fp-template-selector" id="templates-fp-templates">
+            </select>
+          </td>
+          <td>
+            <select size="22" class="templates-fp-file-selector" id="templates-fp-files">
+            </select>
+          </td>
+          <td>
+            <div class="templates-fp-preview" id="templates-fp-preview">
+              <canvas id="templates-fp-preview-canvas"></canvas>
+              <span id="templates-fp-preview-name" class="template-overitem template-file-name"></span>
+              <span id="templates-fp-preview-title" class="template-overitem template-title"></span>
+              <span id="templates-fp-preview-title-en" class="template-overitem template-title-en"></span>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="box-buttons">
+        <div class="tool is-button ok-button" id="templates-fp-ok-tool" tabindex="0">OK</div>
+        <div class="tool is-button" id="templates-fp-cancel-tool" tabindex="0">Cancel</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="is-hidden" id="shortcut-dialog">
+    <div class="tool-dropdown-content" style="position: fixed;">
+      <div class="array-dropdown-items" id="shortcut-outer">
+        <table class="dropdown-items">
+          <tr>
+            <td colspan="2" class="title tool-label">Shortcut keys</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td class="shortcut-title-key">Key</td><td class="shortcut-title-function">Function</td>
+          </tr>
+        </table>
+        <div id="shortcut-keys-outer">
+          <div id="shortcut-keys-container" class="tool-settings-wide"></div>
+        </div>
+      </div>
+      <div class="box-buttons">
+        <div class="tool is-button" id="shortcut-add-tool">Add</div>
+        <div class="tool is-button" id="shortcut-remove-tool">Remove</div>
+        <div class="tool is-button" id="shortcut-default-tool">Default</div>
+        <div class="tool is-button" id="shortcut-default-all-tool">Default all</div>
+        <div class="tool is-button" id="shortcut-save-tool">Save</div>
+        <div class="tool is-button" id="shortcut-close-tool">Close</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="is-hidden" id="shortcut-input-dialog">
+    <div class="tool-dropdown-content" style="position: fixed;">
+      <div class="title tool-label" id="shortcut-input-title">Select shortcut</div>
+      <div id="key-selector" style="margin-top: 5px;"></div>
+      <div class="title tool-label">Select function</div>
+      <select id="shortcut-functions" style="margin-top: 5px; margin-left: 5px; margin-bottom: 5px;"></select>
+      <div class="box-buttons">
+        <div class="tool is-button ok-button" id="shortcut-input-ok-tool" tabindex="0">OK</div>
+        <div class="tool is-button cancel-button" id="shortcut-input-cancel-tool" tabindex="0">Cancel</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="is-hidden" id="storage-fp">
+    <div class="tool-dropdown-content">
+
+      <div class="title tool-label" id="storage-fp-open-title">Open from storage</div>
+      <div class="title tool-label is-no-display" id="storage-fp-save-title">Save into storage</div>
+      <div class="title tool-label" id="storage-fp-folder-title">Choose folder</div>
+      <div id="storage-fp-save-name" class="is-no-display">
+        <span class="tool-label">File name</span>
+        <input class="" type="text" id="storage-fp-filename" style="width: 70%;" placeholder="Input name">
+      </div>
+
+      <div id="storage-fp-location-bar"></div>
+
+      <table class="storage-fp-body">
+        <tr>
+          <td>
+            <div id="storage-fp-storages-outer">
+              <div id="storage-fp-storages-contents"></div>
+            </div>
+            <div class="box-buttons">
+              <div class="tool is-button" id="storage-fp-add">Add</div>
+              <div class="tool is-button" id="storage-fp-remove">Remove</div>
+            </div>
+          </td>
+          <td>
+            <div id="storage-fp-files-outer">
+              <div id="storage-fp-files-contents"></div>
+            </div>
+            <div class="box-buttons">
+              <div class="tool is-button" id="storage-fp-new-folder">New folder</div>
+              <div class="tool is-button" id="storage-fp-rename">Rename</div>
+              <div class="tool is-button" id="storage-fp-remove-file">Remove</div>
+            </div>
+          </td>
+
+          <td style="vertical-align: top;">
+            <div class="templates-fp-preview" id="templates-fp-preview">
+              <canvas id="storage-fp-preview-canvas"></canvas>
+              <span id="storage-fp-preview-name" class="template-overitem template-file-name"></span>
+              <span id="storage-fp-preview-title" class="template-overitem template-title"></span>
+              <span id="storage-fp-preview-title-en" class="template-overitem template-title-en"></span>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <table id="storage-fp-save-options">
+        <tr>
+          <td>
+            <input type="checkbox" id="storage-fp-save-bounds-setting-use">
+            <label class="tool-label" for="storage-fp-save-bounds-setting-use">Use bounds</label>
+          </td>
+          <td>
+            <input type="checkbox" id="storage-fp-save-for-printing">
+            <label class="tool-label" for="storage-fp-save-for-printing">For printing</label>
+          </td>
+          <td>
+            <input type="checkbox" id="storage-fp-save-no-data">
+            <label class="tool-label" for="storage-fp-save-no-data">No data to open</label>
+          </td>
+          <td>
+            <input type="checkbox" id="storage-fp-grid-number">
+            <label class="tool-label" for="storage-fp-grid-number">Grid numbering</label>
+          </td>
+        </tr>
+      </table>
+      <div class="box-buttons">
+        <div class="tool is-button ok-button" id="storage-fp-ok-tool" tabindex="0">OK</div>
+        <div class="tool is-button" id="storage-fp-cancel-tool" tabindex="0">Cancel</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="is-hidden" id="storage-selection-dialog">
+    <div class="tool-dropdown-content">
+      <div class="title tool-label" id="storage-selection-title">Select storage</div>
+      <table>
+        <tr>
+          <td class="tool-label">Name</td>
+          <td>
+            <input type="text" class="input-value" id="storage-selection-name-input" placeholder="Input name">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="radio" id="storage-selection-googledrive" name="storage-type" checked>
+            <label for="storage-selection-googledrive">Google Drive</label>
+          </td>
+        </tr>
+        <tr class="is-no-display" id="storage-selection-dropbox-row">
+          <td colspan="2">
+            <input type="radio" id="storage-selection-dropbox" name="storage-type">
+            <label for="storage-selection-dropbox">Dropbox</label>
+          </td>
+        </tr>
+      </table>
+      <div class="box-buttons">
+        <div class="tool is-button ok-button" id="storage-selection-ok-tool" tabindex="0">OK</div>
+        <div class="tool is-button cancel-button" id="storage-selection-cancel-tool" tabindex="0">Cancel</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-dropdown-dialog msgbox-top is-hidden" id="overwrite-dialog">
+    <div class="tool-dropdown-content">
+      <div class="title tool-label">Overwrite</div>
+      <div class="tool-label">Overwrites following file.</div>
+      <div class="title tool-label" id="overwrite-name"></div>
+      <div class="box-buttons">
+        <div class="tool is-button ok-button" id="overwrite-all-ok-tool" tabindex="0">Overwrite all</div>
+        <div class="tool is-button ok-button" id="overwrite-this-ok-tool" tabindex="0">Overwrite this</div>
+        <div class="tool is-button ok-button" id="overwrite-skip-ok-tool" tabindex="0">Skip this</div>
+        <div class="tool is-button ok-button" id="overwrite-skip-all-ok-tool" tabindex="0">Skip all</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-dropdown-dialog msgbox-top is-hidden" id="dropbox-auth-dialog">
+    <div class="tool-dropdown-content">
+      <div class="array-dropdown-items">
+        <table class="dropdown-items">
+          <tr>
+            <td class="title tool-label" id="dropbox-auth-title">Dropbox authenticate</td>
+          </tr>
+        </table>
+        <div class="box-buttons">
+          <div class="tool is-button ok-button" id="dropbox-auth-signin" tabindex="0">Sign in</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-dropdown-bottom is-hidden" id="notice-dropdown">
+    <div class="tool-dropdown-content" id="notices"></div>
+  </div>
+
+  <a href="" download style="visibility: hidden;" id="save-url"></a>
+  <input type="file" class="is-hidden" id="file-input" accept="image/svg+xml">
+  <script type="module" src="./assets/js/app.js"></script>
+  <div id="working-box"></div>
+
+</body>
+</html>

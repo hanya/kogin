@@ -1,0 +1,107 @@
+{
+  "build": {
+    "beforeDevCommand": "",
+    "beforeBuildCommand": "",
+    "devPath": "../src",
+    "distDir": "../src",
+    "withGlobalTauri": true
+  },
+  "package": {
+    "productName": "Kogin",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "open": "^/|^[A-Z]\\\\:|^https:|^http:"
+      },
+      "path": {
+        "all": true
+      },
+      "dialog": {
+        "open": true,
+        "save": true
+      },
+      "fs": {
+        "readFile": true,
+        "writeFile": true,
+        "removeDir": true,
+        "scope": [
+          "$APPCONFIG/**"
+        ]
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "GraphicsAndDesign",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "kogin",
+      "longDescription": "Kogin is a dedicated application to draw pattern for Kogin zashi and Hishi zashi. The pattern drawn by Kogin is stored as SVG file which contains data so that can be inserted into web page and edit it again.\nTemplate support helps you to make different patterns with the same motifes.",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "Drawing tool for pattern of Kogin zashi.",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": "",
+        "wix": {
+          "language": ["en-US", "ja-JP"]
+        }
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false,
+      "endpoints": [
+        "https://releases.myapp.com/{{target}}/{{current_version}}"
+      ],
+      "dialog": true,
+      "pubkey": "YOUR_UPDATER_SIGNATURE_PUBKEY_HERE"
+    },
+    "windows": [
+      {
+        "label": "main",
+        "url": "tabs.html",
+        "fileDropEnabled": false,
+        "title": "kogin",
+        "visible": false
+      }
+    ],
+    "cli": {
+      "description": "Drawing tool for pattern of Kogin zashi.",
+      "afterHelp": "kogin path",
+      "subcommands": {
+        "open": {
+          "args": [
+            {
+              "name": "path",
+              "index": 1,
+              "takesValue": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

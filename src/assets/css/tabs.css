@@ -1,0 +1,179 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 400;
+  margin: 0;
+  height: 100%;
+}
+
+#tab-headers-part {
+  position: relative;
+  width: calc(100% - 30px);
+  height: 25px;
+}
+
+#tab-headers {
+  display: block;
+  width: 100%;
+  height: 25px;
+}
+
+.tab-drag-target {
+  background-color: #f0f0f0;
+}
+
+.tab {
+  display: block;
+  float: left;
+  text-align: left;
+  height: 25px;
+  padding: 3px 6px;
+  margin: 0;
+  min-width: 170px;
+  max-width: 170px;
+  font-size: 14px;
+  border-top: 0;
+  border-right: 1px solid #fff;
+  border-left: 1px solid #fff;
+  position: relative;
+}
+
+.tab:hover {
+  background-color: #fafafa;
+}
+
+input[name="tabs"] {
+  display: none;
+}
+
+#tab-headers input:checked+.tab {
+  background-color: #f0f0f0;
+  border-top: 0;
+  border-right: 1px solid #888;
+  border-left: 1px solid #888;
+}
+
+.tab-title {
+  display: inline-block;
+  max-width: 140px;
+  height: 20px;
+  overflow-x: hidden;
+  word-break: break-all;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.close-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.close-icon:hover {
+  background-color: #e8e8e8;
+}
+
+#new-tab:hover {
+  background-color: #e8e8e8;
+}
+
+#new-tab {
+  display: block;
+  float: left;
+  height: 25px;
+  width: 30px;
+  padding-left: 5px;
+  padding-top: 3px;
+  background-color: #fff;
+}
+
+#tab-listing:hover {
+  background-color: #e8e8e8;
+}
+
+#tab-listing {
+  display: block;
+  float: right;
+  width: 30px;
+  padding-left: 5px;
+  padding-top: 3px;
+  background-color: #fff;
+}
+
+#tab-list {
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #888;
+  padding: 5px;
+  font-size: 14px;
+  float: right;
+  right: 0px;
+  min-width: 150px;
+}
+
+.tab-list-entry:hover {
+  background-color: #e8e8e8;
+}
+
+.tab-list-entry {
+  user-select: none;
+  width: 100%;
+  line-height: 130%;
+}
+
+#tab-contents {
+  position: absolute;
+  top: 25px;
+  border-top: 1px solid #888;
+  width: 100%;
+  height: calc(100% - 25px);
+  overflow-y: hidden;
+}
+
+.frame {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  scrollbar-width: none;
+}
+
+.hidden-frame {
+  display: none;
+}
+
+.hidden-item {
+  display: none;
+}
+
+#tabs-about-dialog {
+  position: absolute;
+  min-width: 230px;
+  max-height: 90vh;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .25);
+  border-radius: 3px;
+  z-index: 1010;
+  padding: 5px;
+  line-height: 140%;
+}
+
+.title {
+  border-bottom: 1px solid #999999;
+}
+
+.is-button:hover {
+  cursor: default;
+  box-shadow: inset 0 100rem 0 #eeeeee;
+}
+
+.is-button {
+  font-size: 12px;
+  border: 1px solid #888;
+  padding: 3px;
+  text-align: center;
+}
