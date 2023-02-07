@@ -12,6 +12,11 @@ import { View } from "./view.js";
 import { ElementTool } from './elements.js';
 import { Normalizer } from "./normalize.js";
 
+let isWebkit = false;
+if (window.parent && window.parent.__TAURI__) {
+    isWebkit = window.parent.__TAURI__.path.sep == '/';
+}
+
 
 const SIZE_PREVIEW = 300;
 const SIZE_SMALL = 350;
@@ -989,12 +994,18 @@ class TabManager {
         label.setAttribute('for', locationId + '-input');
         const nameSpan = TemplateElements.addSpan(label, name);
         nameSpan.id = this._tabNameId(locationId);
-        nameSpan.classList.add('tab-name');
+        /* nameSpan.classList.add('tab-name'); */
+        if (isWebkit) {
+            nameSpan.classList.add('webkit-vertical-align');
+        }
 
         if (isLocal) {
             const folderSpan = TemplateElements.addSpan(label, '');
             folderSpan.classList.add('is-button');
             folderSpan.classList.add('tab-dropdown');
+            if (isWebkit) {
+                folderSpan.classList.add('webkit-vertical-align');
+            }
             TemplateElements.addFolderSVG(folderSpan);
             // load from local, folder icon
             folderSpan.addEventListener('click', (ev) => {
@@ -1007,6 +1018,9 @@ class TabManager {
         TemplateElements.addArrowSVG(arrowSpan);
         arrowSpan.classList.add('is-button');
         arrowSpan.classList.add('tab-dropdown');
+        if (isWebkit) {
+            arrowSpan.classList.add('webkit-vertical-align');
+        }
         // dropdown menu
         arrowSpan.addEventListener('click', (ev) => {
             if (this.tabHeaderArrowClickListener) {

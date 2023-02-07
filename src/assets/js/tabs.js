@@ -5,6 +5,9 @@ import { initPath } from "./tools.js";
 import { PROJECT } from "./project.js";
 
 
+let isWebkit = false;
+
+
 class Elements {
     static addDiv(parent, id = null) {
         const div = document.createElement('div');
@@ -72,6 +75,9 @@ class Elements {
         const span = Elements.addSpan(label, title);
         span.setAttribute('id', `tab-title-${num}`);
         span.classList.add('tab-title');
+        if (isWebkit) {
+            span.classList.add('webkit-vertical-align');
+        }
         const close = Elements.addCloseSVG(label);
         return div;
     }
@@ -454,6 +460,7 @@ function print_string(s) {
 
 window.onload = function () {
     if (window.__TAURI__) {
+        isWebkit = window.__TAURI__.path.sep == '/';
         initPath();
 
         window.__TAURI__.event.listen("tauri://file-drop", (ev) => {

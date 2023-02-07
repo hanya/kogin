@@ -53,7 +53,7 @@ input[name="tabs"] {
 
 #tab-headers input:checked+.tab {
   background-color: #f0f0f0;
-  border-top: 0;
+  border-top: 1px solid #888;
   border-right: 1px solid #888;
   border-left: 1px solid #888;
 }
@@ -64,6 +64,9 @@ input[name="tabs"] {
   height: 20px;
   overflow-x: hidden;
   word-break: break-all;
+}
+
+.webkit-vertical-align {
   vertical-align: -webkit-baseline-middle;
 }
 

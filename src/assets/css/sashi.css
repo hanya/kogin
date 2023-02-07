@@ -665,16 +665,18 @@ input[name="templates-tab"] {
   border-right: 1px solid #000000;
   border-left: 1px solid #000000;
 }
-
+/*
 .tab-name {
-  vertical-align: -webkit-baseline-middle;
 }
-
+*/
 .tab-dropdown {
   width: 20px;
   display: inline-block;
   text-align: center;
   margin-left: 10px;
+}
+
+.webkit-vertical-align {
   vertical-align: -webkit-baseline-middle;
 }
 
