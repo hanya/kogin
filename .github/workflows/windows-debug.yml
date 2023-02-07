@@ -1,8 +1,5 @@
-name: Release
+name: Windows-debug
 on:
-  push:
-    tags:
-      - 'v*'
   workflow_dispatch:
 
 jobs:
