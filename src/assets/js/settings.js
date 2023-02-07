@@ -8,10 +8,10 @@ class LocalSettings {
     }
 
     async load() {
-        const s = await this.fs.readTextFile(
-            SETTINGS_NAME, { dir: this.fs.BaseDirectory.AppConfig }
-        );
         try {
+            const s = await this.fs.readTextFile(
+                SETTINGS_NAME, { dir: this.fs.BaseDirectory.AppConfig }
+            );
             if (s) {
                 const items = JSON.parse(s);
                 for (const [key, value] of Object.entries(items)) {
