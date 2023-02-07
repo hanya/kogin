@@ -17,7 +17,7 @@ downloader = { version = "0.2.6" }
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.2", features = ["cli", "dialog-open", "dialog-save", "fs-read-file", "fs-remove-dir", "fs-write-file", "objc-exception", "path-all", "shell-open", "wry"], default-features = false }
+tauri = { version = "1.2", features = ["cli", "dialog-open", "dialog-save", "fs-read-file", "fs-remove-dir", "fs-write-file", "objc-exception", "path-all", "shell-open", "wry", "devtools"], default-features = false }
 sha1 = { version = "0.10.1" }
 
 [features]
