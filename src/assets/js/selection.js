@@ -452,7 +452,7 @@ export class SelectionManager extends Broadcaster {
         const x = Math.floor(point.x) - 1 + 0.5;
         const y = Math.floor(point.y) - 1 + 0.5;
         const width = Math.floor(size.width) + 2;
-        const height = Math.floor(size.height) + 2 + 0.5;
+        const height = Math.floor(size.height) + 2;
         const rect = new paper.Path.Rectangle({
             point: new paper.Point(x, y),
             size: new paper.Size(width, height),
