@@ -3905,6 +3905,7 @@ export class View extends Preview {
                 break;
             case this.mouseDragModeBoundsEdit:
                 this.boundsManager.drag(event.point);
+                this.update();
                 break;
             default:
                 break;
