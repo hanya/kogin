@@ -146,7 +146,7 @@ export class View extends Preview {
         this.sashi.canvas.addEventListener('drop', this.onDrop);
         this.sashi.canvas.addEventListener('dragover', this.onDragover);
 
-        if (getLang() == 'jp') {
+        if (getLang() == 'ja') {
             this.toolManager.translateUI();
             const hasTemplatesSetting = this.sashi.settingsManager.hasSetting('templates.', 'locations');
             if (!hasTemplatesSetting) {
@@ -1628,7 +1628,7 @@ export class View extends Preview {
                 this.toolManager.closeDialog('about-dialog');
             },
             'shortcut-keys': () => {
-                openSome(PROJECT.HELP_BASE + '/key_' + getLang() + '.md', '_blank');
+                openSome(PROJECT.HELP_BASE + '/keys_' + getLang() + '.md', '_blank');
                 this.toolManager.closeAnyPopup();
             },
             'help': () => {

@@ -9,4 +9,4 @@ export const PROJECT = {
 };
 
 PROJECT.URL = `https://github.com/${PROJECT.ORG}/${PROJECT.NAME}`;
-PROJECT.HELP_BASE = `${PROJECT.URL}/help`;
+PROJECT.HELP_BASE = `${PROJECT.URL}/blob/master/help`;

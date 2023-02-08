@@ -263,7 +263,7 @@ export function getDateForFileName() {
 export function getLang() {
     const lang = navigator.language;
     if (lang == 'ja' || lang == 'ja_JP' || lang == 'ja-JP') {
-        return 'jp';
+        return 'ja';
     } else {
         return 'en';
     }
