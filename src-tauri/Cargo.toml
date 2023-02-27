@@ -1,6 +1,6 @@
 [package]
 name = "kogin"
-version = "0.1.0"
+version = "0.2.0"
 description = "Drawing tool for pattern of Kogin zashi."
 authors = ["hanya.runo@gmail.com"]
 license = "MIT"
