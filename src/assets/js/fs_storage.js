@@ -7,7 +7,8 @@ const TEMPLATES_SETTING_NAME = 'templates.json';
 
 
 export class FsLocationInfo {
-    constructor() {
+    constructor(dirPath = '') {
+        this.dirPath = dirPath != '' ? dirPath : pathContainer.configDir;
         this.fs = window.__TAURI__.fs;
         this.invoke = window.__TAURI__.invoke;
     }
@@ -20,16 +21,14 @@ export class FsLocationInfo {
 
     loadLocations(cbLocationsLoaded) {
         const locations = new Map();
-        this.fs.readTextFile(
-            TEMPLATES_SETTING_NAME,
-            { dir: this.fs.BaseDirectory.AppConfig }
+        this.invoke('template_file_read',
+            { name: TEMPLATES_SETTING_NAME, folder: '/', dir: this.dirPath }
         ).then((s) => {
             try {
                 const items = JSON.parse(s);
                 for (const [_, item] of Object.entries(items)) {
-                    const id = item.id;
                     const obj = {
-                        key: id,
+                        key: item.key,
                     };
                     Object.assign(obj, item);
                     locations.set(item.id, obj);
@@ -43,22 +42,23 @@ export class FsLocationInfo {
         });
     }
 
-    addLocation(_id, location, cbAddLocation) {
+    addLocation(_id, location, cbAddLocation, cbError) {
         this.loadLocations((locations) => {
-            let key = 1;
-            while (locations.has(key)) {
-                key += 1;
+            let id = 1;
+            while (locations.has(id)) {
+                id += 1;
             }
-            location.id = key;
-            locations.set(key, location);
+            location.key = location.folder_name;
+            delete location.folder_name;
+            locations.set(id, location);
 
             this.invoke('dir_create', {
-                name: key.toString(), dir: pathContainer.templatesDir,
+                name: location.key.toString(), dir: this.dirPath,
             }).then((path) => {
                 this.storeLocations(locations);
 
                 if (cbAddLocation) {
-                    cbAddLocation(key, key, location);
+                    cbAddLocation(location.key, id, location);
                 }
             });
         });
@@ -66,7 +66,7 @@ export class FsLocationInfo {
 
     removeLocation(key, id, cbRemoveLocation) {
         this.loadLocations((locations) => {
-            locations.delete(key);
+            locations.delete(id);
 
             this.storeLocations(locations);
 
@@ -78,13 +78,13 @@ export class FsLocationInfo {
 
     updateLocation(key, id, updateValues, cbUpdated, mode) {
         this.loadLocations((locations) => {
-            const location = locations.get(key);
+            const location = locations.get(id);
             if (location) {
                 Object.assign(location, updateValues);
 
                 this.storeLocations(locations, cbUpdated);
             } else {
-                console.log("no location found: " + key.toString());
+                console.log("no location found: " + id.toString());
             }
         });
     }
@@ -92,14 +92,12 @@ export class FsLocationInfo {
     storeLocations(locations, cbStored) {
         try {
             const obj = {};
-            for (const [key, value] of locations.entries()) {
-                obj[key] = value;
+            for (const [id, value] of locations.entries()) {
+                obj[id] = value;
             }
             const s = JSON.stringify(obj);
-            this.fs.writeTextFile(
-                TEMPLATES_SETTING_NAME,
-                s,
-                { dir: this.fs.BaseDirectory.AppConfig }
+            this.invoke('template_file_write',
+                { name: TEMPLATES_SETTING_NAME, folder: '/', dir: this.dirPath, data: s }
             ).catch((e) => {
                 console.log(e);
             });
@@ -120,9 +118,10 @@ function getName(id) {
 
 
 export class FSStorage {
-    constructor(folderId, name) {
+    constructor(folderId, name, dirName, dirPath = '') {
         this.name = name;
-        this.folderName = folderId.toString();
+        this.folderName = dirName;
+        this.dirPath = dirPath != '' ? dirPath : pathContainer.templatesDir;
         this.valid = false;
         this.initialized = false;
         this.fs = window.__TAURI__.fs;
@@ -133,7 +132,7 @@ export class FSStorage {
     init(cbInitialized) {
         this.initialized = true;
         this.invoke('dir_create', {
-            name: this.folderName, dir: pathContainer.templatesDir,
+            name: this.folderName, dir: this.dirPath,
         }).then((path) => {
             this.path = path;
             this.valid = true;

@@ -71,7 +71,7 @@ export class Sashi {
         this.stitchManager = new StitchManager(
             this.gridManager, this, this.viewOption.viewMode, this.viewOption.pivotColor);
         if (isApp) {
-            this.templateManager = window.docs ? window.docs.templateManager : new TemplateManager();
+            this.templateManager = window.docs ? window.docs.templateManager : new TemplateManager(this.templatesSetting.dirPath);
             this.initForStorage();
         }
         this.filter = new Filter(this);

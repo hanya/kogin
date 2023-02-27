@@ -172,6 +172,15 @@
           <span id="view-setting-tool-key"></span>
         </div>
 
+        <div class="tool is-button" id="templates-setting-tool">
+          <div class="icon-container">
+            <svg id="templates-setting-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
+            </svg>
+          </div>
+          <span class="tool-label">Templates setting</span>
+          <span id="templates-setting-tool-key"></span>
+        </div>
+
         <div class="tool is-button" id="metadata-tool">
           <div class="icon-container">
             <svg id="metadata-icon" class="svg-icon" fill="currentColor" viewBox="0 0 20 20" height="20" width="20">
@@ -955,6 +964,33 @@
           <div class="tool is-button ok-button" id="view-setting-default-ok-tool" tabindex="0">Save as default</div>
           <div class="tool is-button ok-button" id="view-setting-document-ok-tool" tabindex="0">Apply for this document</div>
           <div class="tool is-button cancel-button" id="view-setting-close-tool" tabindex="0">Close</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-dropdown-top is-hidden" id="templates-setting-dialog">
+      <div class="tool-dropdown-content">
+        <table class="dropdown-items">
+          <tr>
+            <td colspan="2" class="title tool-label">Templates setting</td>
+          </tr>
+          <tr id="auto-scroll-on-templates">
+            <td colspan="2">
+              <input type="checkbox" id="templates-setting-specify-directory">
+              <label class="tool-label" for="templates-setting-specify-directory">Specify directory</label>
+            </td>
+          </tr>
+
+          <tr>
+            <td><div class="tool is-button" id="templates-setting-choose-dir-tool">Choose</div></td>
+          </tr>
+          <tr>
+            <td><div class="tool" id="templates-setting-dir-path"></div></td>
+          </tr>
+        </table>
+        <div class="box-buttons">
+          <div class="tool is-button ok-button" id="templates-setting-ok-tool" tabindex="0">OK</div>
+          <div class="tool is-button cancel-button" id="templates-setting-close-tool" tabindex="0">Close</div>
         </div>
       </div>
     </div>
@@ -2294,6 +2330,11 @@
             <td><span class="tool-label">Name</span></td>
             <td><input type="text" id="templates-name" class="input-value"></td>
           </tr>
+          <tr id="templates-folder-name-part">
+            <td><span class="tool-label">Folder name</span></td>
+            <td><input type="text" id="templates-folder-name" class="input-value"></td>
+          </tr>
+
           <tr>
             <td>
               <input type="radio" id="templates-local" name="templates-web-type" checked>

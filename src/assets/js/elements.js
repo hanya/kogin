@@ -177,6 +177,15 @@ export class ElementTool {
         }
     }
 
+    getText(id) {
+        const element = document.getElementById(id);
+        if (element) {
+            return element.textContent;
+        } else {
+            return '';
+        }
+    }
+
     getElementTitle(id) {
         const element = document.getElementById(id);
         if (element) {

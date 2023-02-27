@@ -3,6 +3,7 @@ import { Clipboard } from "./clipboard.js";
 import { TemplateManager } from "./template_manager.js";
 import { initPath } from "./tools.js";
 import { PROJECT } from "./project.js";
+import { SettingsManager } from './settings.js';
 
 
 let isWebkit = false;
@@ -309,11 +310,11 @@ class Tabs {
 }
 
 class Documents {
-    constructor(tabs) {
+    constructor(tabs, templatesDirPath) {
         this.index = 1;
         this.tabs = tabs;
         this.clipboard = new Clipboard();
-        this.templateManager = new TemplateManager();
+        this.templateManager = new TemplateManager(templatesDirPath);
         this.templateManager.init();
         tabs.setAddNewCallback(this.cbAddNewTab);
         tabs.setActiveTabChangeCallback(this.cbActiveTabChanged);
@@ -470,9 +471,12 @@ window.onload = function () {
         });
     }
 
-    function init() {
+    async function init() {
+        const settingsManager = new SettingsManager();
+        await settingsManager.loadData();
+        const templatesDirPath = settingsManager.load('templates.', { dirPath: '' });
         const tabs = new Tabs();
-        const documents = new Documents(tabs);
+        const documents = new Documents(tabs, templatesDirPath.dirPath);
         window.docs = documents;
     }
 
@@ -508,19 +512,19 @@ window.onload = function () {
                 }
             }
 
-            init();
-
-            if (openPath && openPath.endsWith('.svg')) {
-                openFromPath(openPath, true);
-            } else {
-                window.docs.addDefault();
-            }
-
+            init().then(() => {
+                if (openPath && openPath.endsWith('.svg')) {
+                    openFromPath(openPath, true);
+                } else {
+                    window.docs.addDefault();
+                }
+            });
         }).catch((e) => {
             console.log(e);
         });
     } else {
-        init();
-        window.docs.addDefault();
+        init().then(() => {
+            window.docs.addDefault();
+        });
     }
 }

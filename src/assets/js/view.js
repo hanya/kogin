@@ -529,6 +529,9 @@ export class View extends Preview {
                     this.toolManager.showMessage('Input name', 'Error');
                 }
             },
+            'templates-add-location-folder-conflict': () => {
+                this.toolManager.showMessage('Change folder name.', 'Error');
+            },
             'templates-add-location-ok-close': () => this.toolManager.closeDialog('templates-add-location-dialog'),
             'templates-add-location-cancel': () => {
                 this.toolManager.closeDialog('templates-add-location-dialog');
@@ -1605,6 +1608,43 @@ export class View extends Preview {
             'pdf-export-default': () => {
                 const options = this.toolManager.getPDFExportOptions();
                 this.sashi.storePDFSettings(options);
+            },
+            'templates-setting': () => {
+                this.toolManager.closeAnyPopup();
+                if (this.sashi.templatesSetting.dirPath != '') {
+                    this.toolManager.setBoolValue('templates-setting-specify-directory', true);
+                    this.toolManager.setText('templates-setting-dir-path', this.sashi.templatesSetting.dirPath);
+                } else {
+                    this.toolManager.setBoolValue('templates-setting-specify-directory', false);
+                    this.toolManager.setText('templates-setting-dir-path', '');
+                }
+                this.toolManager.showDialog(
+                    'templates-setting-dialog'
+                );
+            },
+            'templates-setting-ok': () => {
+                const path = this.toolManager.getBoolValue('templates-setting-specify-directory') ?
+                    this.toolManager.getText('templates-setting-dir-path') : '';
+                const pathChanged = this.sashi.templatesSetting.dirPath != path;
+                this.sashi.templatesSetting.dirPath = path;
+                this.toolManager.closeDialog('templates-setting-dialog');
+                if (pathChanged) {
+                    this.sashi.storeTemplateSettingsPart(this.sashi.templatesSetting, ['dirPath']);
+                    this.toolManager.showMessage('Restart to enable new location for templates.', 'Templates');
+                }
+            },
+            'templates-setting-close': () => {
+                this.toolManager.closeDialog('templates-setting-dialog');
+            },
+            'templates-setting-choose-dir': () => {
+                if (window.__TAURI__) {
+                    window.__TAURI__.dialog.open({
+                        multiple: false,
+                        directory: true,
+                    }).then((selected) => {
+                        this.toolManager.setText('templates-setting-dir-path', selected);
+                    });
+                }
             },
             'ask-for-closing': () => {
                 this.toolManager.showMessage('Dispose modification?', 'Close document', 'ask-for-closing');

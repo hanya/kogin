@@ -2654,10 +2654,15 @@ export class TemplatesWindow {
             data.folders = ['/'];
             data.activeFolder = '/';
         }
+        if (!window.__TAURI__) {
+            data.folder_name = null;
+        }
         this.templateManager.addNewLocation(data, (location) => {
             this.view.fireCommand('templates-add-location-ok-close');
             this.tabManager.addTab(location.id, location.type, location.name);
             this.tabManager.makeTabActive(location.id);
+        }, () => {
+            this.view.fireCommand('templates-add-location-folder-conflict');
         });
         return true;
     }

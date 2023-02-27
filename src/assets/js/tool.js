@@ -173,6 +173,8 @@ export class ToolManager extends ElementTool {
             this.setDisplay('templates-context-open-tool', false);
             this.setDisplay('pdf-font', false);
             this.setDisplay('pdf-font-multibyte', false);
+            this.setDisplay('templates-setting-tool', false);
+            this.setDisplay('templates-folder-name-part', false);
         }
 
         this.updateEditMode('select-tool');
@@ -274,6 +276,7 @@ export class ToolManager extends ElementTool {
     getTemplateLocation() {
         const obj = {};
         obj.name = this.getValue('templates-name');
+        obj.folder_name = this.getValue('templates-folder-name');
         if (this.getBoolValue('templates-local')) {
             obj.type = 'local';
         } else if (this.getBoolValue('templates-github')) {

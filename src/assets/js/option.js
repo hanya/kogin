@@ -145,6 +145,7 @@ export const TemplatesOption = {
     timestamp: 0,
     activeTabIdForPicker: -1,
     nameDownwards: true,
+    dirPath: '',
 };
 
 export const StorageViewOption = {

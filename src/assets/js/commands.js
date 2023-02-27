@@ -99,6 +99,7 @@ export const Commands = [
 ["image-setting", "Image save setting"],
 ["print-setting", "Print setting"],
 ["view-setting", "View setting"],
+["templates-setting", "Templates setting"],
 ["storage-setting", "Storage setting"],
 ["metadata", "Metadata"],
 ["shortcut-keys", "Shortcut keys"],

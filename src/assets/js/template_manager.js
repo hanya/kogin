@@ -310,13 +310,14 @@ export class TemplateManager {
     /**
      * @param {Sashi} sashi
      */
-    constructor() {
+    constructor(dirPath = '') {
         this.loaded = false;
         this.lang = getLang();
         this.loaders = new Map();
+        this.dirPath = dirPath;
         this.initialized = false;
 
-        this.info = window.__TAURI__ ? new FsLocationInfo() : new TemplateLocationInfo();
+        this.info = window.__TAURI__ ? new FsLocationInfo(this.dirPath) : new TemplateLocationInfo();
     }
 
     init() {
@@ -346,7 +347,7 @@ export class TemplateManager {
      */
     setupLoader(location, cbStorageInit) {
         let backend = null;
-        let storage = window.__TAURI__ ? new FSStorage(location.id, location.name) :
+        let storage = window.__TAURI__ ? new FSStorage(location.id, location.name, location.key, this.dirPath) :
                                          new IndexedDBStorage(location.id, location.name);
         storage.init(cbStorageInit);
         let valid = true;
@@ -417,7 +418,7 @@ export class TemplateManager {
      * Add new location and its loader.
      * @param {Object} data Location data without ID.
      */
-    addNewLocation(data, cbAdded) {
+    addNewLocation(data, cbAdded, cbError) {
         if (window.__TAURI__) {
             // id is provided by the info
             this.info.addLocation(null, data, (key, id, location) => {
@@ -428,7 +429,7 @@ export class TemplateManager {
                     const loader = this.getLoader(id);
                     cbAdded(loader.location);
                 });
-            });
+            }, cbError);
         } else {
             this.findNextLocationID(data, cbAdded);
         }
